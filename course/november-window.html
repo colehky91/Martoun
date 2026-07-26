@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The November Window — Interactive Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Chivo:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#071916; --ink-2:#0B2320; --surface:#0F2C27; --surface-2:#153A33;
+  --line:#255049; --line-soft:#1B3E38;
+  --sand:#EDE4D3; --sand-dim:#9FAFA7;
+  --sun:#FF7A1A; --pool:#3FD9C0; --alarm:#FF4560;
+  --nav-w:286px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);color:var(--sand);
+  font-family:'Chivo',system-ui,sans-serif;font-size:16.5px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.display{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;line-height:.95;text-transform:uppercase;letter-spacing:.005em}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:var(--pool)}
+
+/* ── TOP BAR ─────────────────────────────────────── */
+.top{
+  position:fixed;top:0;left:0;right:0;height:60px;z-index:80;
+  background:rgba(7,25,22,.96);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:18px;padding:0 20px;
+}
+.brand{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.25rem;letter-spacing:.02em;white-space:nowrap}
+.brand span{color:var(--sun)}
+.top-meta{margin-left:auto;display:flex;align-items:center;gap:22px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.top-meta .lbl{color:var(--sand-dim);display:block;font-size:9.5px;margin-bottom:2px}
+.top-meta .val{color:var(--sun);font-weight:700;font-size:13px}
+.top-meta .val.phase{color:var(--pool)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--sand);width:38px;height:34px;border-radius:2px;cursor:pointer;font-size:16px}
+
+/* progress bar */
+.prog{position:fixed;top:60px;left:0;right:0;height:2px;background:var(--line-soft);z-index:79}
+.prog i{display:block;height:100%;width:0;background:var(--sun);transition:width .4s ease}
+
+/* ── SIDEBAR ─────────────────────────────────────── */
+.nav{
+  position:fixed;top:62px;bottom:0;left:0;width:var(--nav-w);z-index:70;
+  background:var(--ink-2);border-right:1px solid var(--line);
+  overflow-y:auto;padding:22px 0 40px;
+}
+.nav-grp{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sand-dim);padding:20px 22px 8px}
+.nav a{
+  display:flex;align-items:flex-start;gap:11px;padding:9px 22px;
+  color:var(--sand);text-decoration:none;font-size:14.5px;line-height:1.35;
+  border-left:2px solid transparent;transition:background .15s,border-color .15s;
+}
+.nav a:hover{background:var(--surface)}
+.nav a.on{background:var(--surface);border-left-color:var(--sun);color:#fff}
+.nav a .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--sun);padding-top:3px;flex:none;width:22px}
+.nav a.on .n{color:var(--sun)}
+.nav a .tick{margin-left:auto;color:var(--pool);font-size:12px;opacity:0;flex:none}
+.nav a.done .tick{opacity:1}
+.nav a.done .t{opacity:.62}
+.nav-foot{padding:24px 22px 0;margin-top:14px;border-top:1px solid var(--line-soft);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--sand-dim);line-height:1.8}
+
+/* ── MAIN ────────────────────────────────────────── */
+main{margin-left:var(--nav-w);padding:98px 0 90px;min-height:100vh}
+.panel{display:none;max-width:800px;margin:0 auto;padding:0 34px}
+.panel.on{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:16px}
+h1{font-size:clamp(2.6rem,6vw,4.2rem);margin-bottom:20px;line-height:.9}
+h2{font-size:clamp(1.7rem,3.4vw,2.3rem);margin:52px 0 16px;color:var(--sand)}
+h3{font-size:1.3rem;margin:34px 0 10px}
+h4{font-size:1.05rem;margin:24px 0 8px;color:var(--pool)}
+p{margin-bottom:16px}
+.lede{font-size:1.13rem;color:var(--sand);opacity:.92;margin-bottom:26px}
+.dim{color:var(--sand-dim)}
+strong{color:#fff;font-weight:700}
+em{color:var(--pool);font-style:normal}
+ul,ol{margin:0 0 20px 22px}
+li{margin-bottom:9px}
+hr{border:0;height:1px;background:linear-gradient(90deg,var(--sun),transparent);opacity:.45;margin:44px 0}
+
+.callout{background:var(--ink-2);border-left:3px solid var(--sun);padding:22px 26px;margin:26px 0;border-radius:0 3px 3px 0}
+.callout.warn{border-left-color:var(--alarm)}
+.callout.good{border-left-color:var(--pool)}
+.callout .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sun);display:block;margin-bottom:10px}
+.callout.warn .k{color:var(--alarm)} .callout.good .k{color:var(--pool)}
+.callout p:last-child{margin-bottom:0}
+
+table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14.5px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);border-bottom-color:var(--line)}
+tbody tr:hover{background:var(--ink-2)}
+
+pre{background:var(--ink-2);border:1px solid var(--line-soft);padding:18px 20px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:var(--sand-dim);margin:20px 0;border-radius:2px}
+
+/* ── FORMAT CARDS ────────────────────────────────── */
+.fmt{background:var(--surface);border:1px solid var(--line-soft);padding:24px 26px;margin:16px 0;border-radius:2px;transition:border-color .2s}
+.fmt:hover{border-color:var(--line)}
+.fmt.hit{border-color:var(--pool);background:linear-gradient(180deg,#173A33,#12302A);box-shadow:0 0 0 1px var(--pool) inset}
+.fmt h3{margin:0 0 6px}
+.fmt .num{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;color:var(--sun);display:block;margin-bottom:8px}
+.rate{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pip{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink-2);border:1px solid var(--line-soft);padding:5px 9px;border-radius:2px;color:var(--sand-dim)}
+.pip b{color:var(--sand);font-weight:700}
+.pip.g b{color:var(--pool)} .pip.r b{color:var(--alarm)} .pip.y b{color:var(--sun)}
+
+/* ── QUIZ ────────────────────────────────────────── */
+.quiz{background:var(--ink-2);border:1px solid var(--sun);padding:30px 30px 34px;margin:30px 0;border-radius:2px}
+.q{margin-bottom:24px}
+.q p{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:1.25rem;text-transform:uppercase;margin-bottom:12px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{
+  background:var(--surface);border:1px solid var(--line-soft);color:var(--sand);
+  font-family:'Chivo',sans-serif;font-size:14px;padding:10px 18px;border-radius:2px;
+  cursor:pointer;transition:all .16s;
+}
+.opt:hover{border-color:var(--sun)}
+.opt.sel{background:var(--sun);border-color:var(--sun);color:#0A1614;font-weight:700}
+.qres{margin-top:26px;padding-top:24px;border-top:1px solid var(--line);display:none}
+.qres.show{display:block}
+.qres .rec{background:var(--surface);border-left:3px solid var(--pool);padding:18px 22px;margin-bottom:12px}
+.qres .rec .lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--pool);display:block;margin-bottom:6px}
+.qres .rec b{font-family:'Big Shoulders Display',sans-serif;font-size:1.3rem;text-transform:uppercase;display:block;margin-bottom:5px}
+.qres .rec span{font-size:14px;color:var(--sand-dim)}
+
+/* ── CHECKLISTS ──────────────────────────────────── */
+.check{border:1px solid var(--line-soft);margin:24px 0;border-radius:2px;overflow:hidden}
+.check-hd{background:var(--surface);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line-soft)}
+.check-hd b{font-family:'Big Shoulders Display',sans-serif;font-size:1.15rem;text-transform:uppercase}
+.check-hd .cnt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sun);white-space:nowrap}
+.ck{display:flex;gap:13px;padding:12px 20px;border-bottom:1px solid var(--line-soft);cursor:pointer;align-items:flex-start;font-size:14.5px;transition:background .14s}
+.ck:last-child{border-bottom:0}
+.ck:hover{background:var(--ink-2)}
+.ck .box{width:17px;height:17px;border:1px solid var(--line);flex:none;margin-top:3px;border-radius:2px;position:relative;transition:all .16s}
+.ck.done .box{background:var(--pool);border-color:var(--pool)}
+.ck.done .box::after{content:'✓';position:absolute;inset:0;color:#08201C;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ck.done .txt{opacity:.5;text-decoration:line-through}
+
+/* ── COPY BLOCKS ─────────────────────────────────── */
+.snip{border:1px solid var(--line-soft);margin:20px 0;border-radius:2px;overflow:hidden}
+.snip-hd{background:var(--surface);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.snip-hd b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pool)}
+.cpy{background:none;border:1px solid var(--line);color:var(--sand-dim);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:2px;cursor:pointer;transition:all .16s;white-space:nowrap}
+.cpy:hover{border-color:var(--sun);color:var(--sun)}
+.cpy.ok{background:var(--pool);border-color:var(--pool);color:#08201C;font-weight:700}
+.snip pre{margin:0;border:0;background:var(--ink-2)}
+
+/* ── HOOK BROWSER ────────────────────────────────── */
+.filters{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 18px}
+.fl{background:var(--ink-2);border:1px solid var(--line-soft);color:var(--sand-dim);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;border-radius:2px;cursor:pointer;transition:all .16s}
+.fl:hover{border-color:var(--sun);color:var(--sand)}
+.fl.on{background:var(--sun);border-color:var(--sun);color:#0A1614;font-weight:700}
+.hook{display:flex;gap:14px;align-items:flex-start;padding:13px 16px;border-bottom:1px solid var(--line-soft);font-size:14.5px}
+.hook .hn{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--sun);flex:none;width:22px;padding-top:3px}
+.hook .hc{flex:none;margin-left:auto}
+.hook.hide{display:none}
+
+/* ── PHASE STRIP ─────────────────────────────────── */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:26px 0 30px}
+.pz{background:var(--surface);padding:16px 15px;border-top:2px solid var(--line)}
+.pz.now{background:linear-gradient(180deg,#1D3F37,#12302A);border-top-color:var(--sun)}
+.pz .pn{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand-dim);margin-bottom:6px}
+.pz.now .pn{color:var(--sun)}
+.pz b{font-family:'Big Shoulders Display',sans-serif;font-size:1.15rem;text-transform:uppercase;display:block;margin-bottom:4px}
+.pz span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sand-dim)}
+.pz .badge{display:inline-block;margin-top:8px;background:var(--sun);color:#0A1614;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;padding:3px 7px;border-radius:2px;font-weight:700}
+
+/* ── PANEL FOOTER ────────────────────────────────── */
+.pfoot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:56px;padding-top:26px;border-top:1px solid var(--line);flex-wrap:wrap}
+.btn{
+  background:var(--sun);color:#0A1614;border:1px solid var(--sun);
+  font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.1rem;
+  text-transform:uppercase;letter-spacing:.02em;padding:12px 26px;border-radius:2px;
+  cursor:pointer;text-decoration:none;display:inline-block;transition:all .16s;
+}
+.btn:hover{background:#fff;border-color:#fff}
+.btn.sec{background:transparent;color:var(--sand);border-color:var(--line)}
+.btn.sec:hover{background:var(--surface);color:var(--sand);border-color:var(--sun)}
+.btn.done-b{background:var(--pool);border-color:var(--pool);color:#08201C}
+
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);
+  background:var(--pool);color:#08201C;font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+  padding:12px 22px;border-radius:2px;z-index:200;opacity:0;
+  transition:transform .3s ease,opacity .3s ease;pointer-events:none;
+}
+.toast.up{transform:translate(-50%,0);opacity:1}
+
+.scrim{display:none;position:fixed;inset:0;background:rgba(7,25,22,.7);z-index:69}
+.scrim.on{display:block}
+
+:focus-visible{outline:2px solid var(--pool);outline-offset:3px}
+
+@media(max-width:1000px){
+  .menu-btn{display:block}
+  .nav{transform:translateX(-100%);transition:transform .28s ease;box-shadow:14px 0 40px rgba(0,0,0,.5)}
+  .nav.open{transform:none}
+  main{margin-left:0}
+  .panel{padding:0 20px}
+  .top-meta .box-hide{display:none}
+  .strip{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  body{font-size:16px}
+  .top{gap:12px;padding:0 14px}
+  .brand{font-size:1.05rem}
+  .top-meta{gap:14px}
+  .strip{grid-template-columns:1fr}
+  .pfoot{flex-direction:column;align-items:stretch}
+  .pfoot .btn{text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ── PRINT ───────────────────────────────────────── */
+@media print{
+  body{background:#fff;color:#111;font-size:12pt}
+  .top,.prog,.nav,.scrim,.toast,.pfoot,.cpy,.filters,.menu-btn{display:none!important}
+  main{margin:0;padding:0}
+  .panel{display:block!important;max-width:none;padding:0;page-break-before:always;animation:none}
+  .panel:first-of-type{page-break-before:auto}
+  h1,h2,h3,h4,strong{color:#111}
+  em{color:#111;font-style:italic}
+  .lede,.dim,.pip,.pz span,.pz .pn{color:#444}
+  .callout,.fmt,.quiz,.check,.snip,pre,.pz{background:#fff;border:1px solid #bbb;box-shadow:none}
+  .callout{border-left-width:3px}
+  a{color:#111;text-decoration:underline}
+  th{color:#111;border-bottom-color:#888}
+  td{border-bottom-color:#ccc}
+  pre{color:#333}
+  .hook{border-bottom-color:#ccc}
+  .hook .hn,.fmt .num,.eyebrow,.callout .k{color:#666}
+}
+
+.reset-link{background:none;border:0;color:var(--sand-dim);font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;padding:0;margin-top:10px;text-decoration:underline;text-underline-offset:3px}
+.reset-link:hover{color:var(--alarm)}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+  <div class="brand">THE NOVEMBER <span>WINDOW</span></div>
+  <div class="top-meta">
+    <div class="box-hide"><span class="lbl">Phase now</span><span class="val phase" id="phaseNow">—</span></div>
+    <div class="box-hide"><span class="lbl">Sundays left</span><span class="val" id="sundays">—</span></div>
+    <div><span class="lbl">To launch</span><span class="val mono" id="clock">—</span></div>
+  </div>
+</div>
+<div class="prog"><i id="progBar"></i></div>
+<div class="scrim" id="scrim"></div>
+
+<nav class="nav" id="nav" aria-label="Course sections">
+  <div class="nav-grp">Start</div>
+  <a href="#" data-p="p0"><span class="n">00</span><span class="t">Read this first</span><span class="tick">✓</span></a>
+  <div class="nav-grp">The playbook</div>
+  <a href="#" data-p="p1"><span class="n">01</span><span class="t">The Window</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p2"><span class="n">02</span><span class="t">The Legal Moat</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p3"><span class="n">03</span><span class="t">Pick Your Lane</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p4"><span class="n">04</span><span class="t">The Stack</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p5"><span class="n">05</span><span class="t">Hooks &amp; Retention</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p6"><span class="n">06</span><span class="t">The Machine</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p7"><span class="n">07</span><span class="t">The Money</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p8"><span class="n">08</span><span class="t">Launch Week War Plan</span><span class="tick">✓</span></a>
+  <a href="#" data-p="p9"><span class="n">09</span><span class="t">The Pivot</span><span class="tick">✓</span></a>
+  <div class="nav-grp">Working files</div>
+  <a href="#" data-p="pa"><span class="n">A</span><span class="t">40 Hooks</span><span class="tick">✓</span></a>
+  <a href="#" data-p="pb"><span class="n">B</span><span class="t">Prompt Library</span><span class="tick">✓</span></a>
+  <a href="#" data-p="pc"><span class="n">C</span><span class="t">30-Day Calendar</span><span class="tick">✓</span></a>
+  <a href="#" data-p="pd"><span class="n">D</span><span class="t">Strike-Proofing</span><span class="tick">✓</span></a>
+  <a href="#" data-p="pe"><span class="n">E</span><span class="t">Outreach Scripts</span><span class="tick">✓</span></a>
+  <div class="nav-foot">
+    Progress <b id="progTxt" style="color:var(--sun)">0 / 15</b><br>
+    Not legal or financial advice.<br>
+    See disclaimer in 00.<br>
+    <button class="reset-link" id="resetBtn" type="button">Reset all progress</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════ 00 ══════════ -->
+<section class="panel on" id="p0">
+  <div class="eyebrow">Section 00 · Orientation</div>
+  <h1>Read this first</h1>
+  <p class="lede">This is not a course about a video game. It's a course about <em>attention arbitrage</em> — how to position a faceless content operation in front of the single largest, most predictable spike in global consumer attention this decade, and convert it into revenue before, during, and after it peaks.</p>
+
+  <p>On November 19, 2026, roughly the same thing happens that happened with the Super Bowl, the Barbie release, and the launch of ChatGPT — except bigger, and unlike those, <strong>you already know the exact date.</strong></p>
+  <p>That's the entire edge. A scheduled tsunami with a published arrival time and months of lead.</p>
+
+  <div class="strip" id="strip"></div>
+
+  <h2>What this will not do</h2>
+  <ul>
+    <li>Tell you what's in the game. Nobody knows. Anyone selling you leaks is selling you a lawsuit.</li>
+    <li>Promise a dollar amount. Anyone who does is lying or reckless.</li>
+    <li>Teach fake-leak content. That model is <strong>already dead</strong> — Section 02 shows why, with receipts. It's the most valuable part of this course.</li>
+  </ul>
+
+  <h2>What it will do</h2>
+  <ul>
+    <li>Show you seven content lanes that reliably monetize around an event this size, ranked by speed to first dollar.</li>
+    <li>Give you a production system that lets one person publish 5–15 pieces a day without burning out.</li>
+    <li>Build all of it on a legal footing that doesn't get deleted the week it starts earning.</li>
+    <li>Hand you a day-by-day plan from today through December 31.</li>
+    <li>Turn a 90-day spike into an asset that still pays in 2028.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="k">How to use this</span>
+    <p>Don't read it cover to cover and then start. Read 01 and 02 today. Execute 03 and 04 <strong>this week</strong>. Mark each section complete as you go — the progress bar at the top is your actual build progress, not your reading progress.</p>
+    <p style="margin-top:12px">Your progress, checklists, and last position are saved in this browser automatically. Use the <span class="mono" style="font-size:13px">←</span> and <span class="mono" style="font-size:13px">→</span> keys to move between sections, and link to any section directly with its URL.</p>
+    <p style="margin-top:12px">Reading is not building. The window shrinks by one day every day.</p>
+  </div>
+
+  <div class="callout warn">
+    <span class="k">Disclaimer</span>
+    <p>Educational information about content creation and digital marketing. No guarantee, representation, or warranty of any specific financial result. Results depend on effort, skill, market conditions, and factors outside anyone's control, and most people who buy educational products of any kind do not achieve significant income. Nothing here is legal advice — consult a qualified attorney in your jurisdiction regarding intellectual property, advertising, and disclosure obligations. Not affiliated with, endorsed by, or sponsored by any game publisher, developer, or platform. All trademarks belong to their respective owners and are referenced descriptively only.</p>
+  </div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 01 ══════════ -->
+<section class="panel" id="p1">
+  <div class="eyebrow">Section 01</div>
+  <h1>The Window</h1>
+  <p class="lede">Content businesses die from one thing more than any other: unpredictable demand. An event this size inverts that completely.</p>
+
+  <h2>Demand you can actually forecast</h2>
+  <p><strong>Predictable in timing.</strong> November 19, 2026. Preload opens November 12. Marketing beats — trailers, gameplay reveals, review embargo, streamer early access — land in a compressed window before that. You can build inventory <em>in advance</em> of demand you know is coming.</p>
+  <p><strong>Predictable in volume.</strong> Pre-orders opened June 25 at $79.99 standard / $99.99 ultimate. The publisher has publicly tied record fiscal-year revenue to this launch. There's no PC release at launch — which means an enormous secondary audience who'll spend the whole window <em>watching</em> rather than playing. Watching means consuming content. That's your audience.</p>
+  <p><strong>Predictable in shape.</strong> We know what people want around a launch this size because it happens the same way at every scale:</p>
+
+  <table>
+    <thead><tr><th>Phase</th><th>What people want</th><th>What wins</th></tr></thead>
+    <tbody>
+      <tr><td>90–30 days out</td><td>Speculation, comparison, hype</td><td>Analysis, countdowns, "everything we know"</td></tr>
+      <tr><td>30–7 days out</td><td>Preparation, decisions</td><td>Which edition, which console, is it worth it</td></tr>
+      <tr><td>Launch week</td><td>Orientation, help, reaction</td><td>Guides, tips, first-hours, reactions</td></tr>
+      <tr><td>7–90 days after</td><td>Mastery, discovery</td><td>Deep guides, methods, secrets, best-of lists</td></tr>
+      <tr><td>90+ days</td><td>Long-tail utility</td><td>Evergreen guides, "still worth it in 2027"</td></tr>
+    </tbody>
+  </table>
+  <p>Each row is a different content product. Most people make one and quit. You're going to run the whole arc.</p>
+
+  <hr>
+  <h2>The four phases</h2>
+
+  <h3>Phase 1 — Build <span class="dim mono" style="font-size:12px">(now → Oct 15)</span></h3>
+  <p>Your job right now is <strong>not</strong> to make money. It's to accumulate three assets: aged accounts with a topical history the algorithm trusts; a tested format, because you don't want to be discovering what works on November 12; and an owned audience — email, Discord, SMS — because platforms giveth and taketh away.</p>
+  <p>If you do nothing else: post daily, find one format with consistent watch time, start capturing emails.</p>
+
+  <h3>Phase 2 — Surge <span class="dim mono" style="font-size:12px">(Oct 15 → Nov 11)</span></h3>
+  <p>Marketing ramps. Search volume climbs steeply. You go from 2 posts a day to 6–10, launch your monetization offers, and start paid traffic if you have budget.</p>
+
+  <h3>Phase 3 — Detonation <span class="dim mono" style="font-size:12px">(Nov 12 → Dec 31)</span></h3>
+  <p>Preload on the 12th, launch on the 19th. Every metric you care about at its ceiling. This is the harvest.</p>
+  <div class="callout"><span class="k">The rule of Phase 3</span><p><strong>Build nothing. Sell everything.</strong> It must all already exist.</p></div>
+
+  <h3>Phase 4 — Harvest <span class="dim mono" style="font-size:12px">(Jan 2027 →)</span></h3>
+  <p>The spike decays but doesn't disappear. Online modes mature, updates ship, the PC port gets announced and released (historically a 6–18 month lag), DLC arrives. Your channels are now aged, monetized, and authoritative in a category with years of runway. That's where the actual asset value is — see Section 09.</p>
+
+  <hr>
+  <h2>The uncomfortable math</h2>
+  <p>You'll make better decisions with real numbers, so here they are.</p>
+  <p><strong>Platform creator payouts are low.</strong> Short-form programs pay roughly $0.02–$1.00 per 1,000 views depending on platform, audience geography, and program. Gaming audiences skew young and international, pushing you toward the low end. A million short-form views might pay $30–$400. Real money, but not the business.</p>
+  <p><strong>The business is what you do with the traffic.</strong> Every serious faceless operator earns most revenue elsewhere: affiliates, their own products, brand deals, and traffic redirected somewhere worth more. Section 07 covers all seven rails.</p>
+  <div class="callout warn">
+    <span class="k">Expectation setting</span>
+    <p>Most accounts make <strong>$0 for the first 30–45 days.</strong> That's normal and it's not a signal to quit — it's what accumulation looks like. Nobody can tell you which outcome you'll get. Volume, consistency, and the legal discipline in Section 02 are the three variables you actually control.</p>
+  </div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 02 ══════════ -->
+<section class="panel" id="p2">
+  <div class="eyebrow">Section 02 · Read this twice</div>
+  <h1>The Legal Moat</h1>
+  <p class="lede">Worth more than the rest of this course combined. Not because it makes you money directly — because it stops you losing everything in the exact month the money arrives.</p>
+
+  <h2>The business model that just died</h2>
+  <p>Between 2024 and 2026 an entire cottage industry grew around AI-generated "leaked footage" — hyper-realistic clips passed off as real leaks. Millions of views. It looked like free money.</p>
+  <p><strong>That industry is being systematically dismantled right now.</strong></p>
+
+  <table>
+    <thead><tr><th>When</th><th>What happened</th></tr></thead>
+    <tbody>
+      <tr><td>Early 2026</td><td>Takedowns issued against AI-generated videos made with a generative world model that produced game-like interactive environments.</td></tr>
+      <tr><td>April 2026</td><td>A prominent fan account received a cease-and-desist and issued a public apology on April 24, acknowledging the AI content used copyrighted material and trademarks and risked confusing fans into thinking it was real.</td></tr>
+      <tr><td>Mid-2026</td><td>Mass DMCA takedowns across YouTube and X. Videos trending one day showed copyright-holder notices the next. Large channels targeted, not just individual uploads.</td></tr>
+      <tr><td>Ongoing</td><td>Long enforcement history against mods, ports, VR adaptations — including a fan map project built only from trailer analysis and speculation.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Why "but the AI made it" is not a defense</h2>
+  <p>Copyright protects the <em>expression</em>. Trademark protects the <em>brand identifiers</em>. An AI image containing none of the original's pixels can still infringe because it:</p>
+  <ul>
+    <li>Uses <strong>protected trademarks</strong> — series name, logo, distinctive title typography, character names.</li>
+    <li>Creates <strong>consumer confusion</strong>, the core trademark harm. If a viewer thinks they're seeing official material, that's precisely the injury the law exists to prevent.</li>
+    <li>Can be a <strong>derivative work</strong> built on copyrighted source material.</li>
+  </ul>
+  <p>The DMCA lets a rights holder demand removal of content that creates confusion or damages the brand, and platforms comply first and ask later. Add that the publisher's CEO stated publicly in February 2026 that generative AI has no part in the studio's own development and its worlds are handcrafted — that's a brand-integrity position, which means AI imitation is treated as a <em>brand threat</em>, not a fan tribute.</p>
+
+  <div class="callout warn">
+    <span class="k">The timing problem</span>
+    <p>Enforcement gets <strong>more</strong> aggressive as launch approaches, because the company is protecting the most commercially critical marketing pipeline in its history. Build on fake leaks and the most likely month to get deleted is the exact month the money shows up. A hundred days of work, wiped at the finish line.</p>
+  </div>
+
+  <hr>
+  <h2>The compliant play</h2>
+  <p>Here's the good news: <strong>the enforcement is aimed at a narrow target.</strong> It hits content that imitates the product or impersonates official material. It does not touch commentary, news, analysis, education, or original creative work that merely discusses the subject.</p>
+  <p>You're going to build in the safe lane — and the safe lane is <em>less</em> competitive precisely because everyone else is still chasing traffic that's about to evaporate.</p>
+
+  <h3>The eight rules of the moat</h3>
+  <div class="fmt"><span class="num">Rule 01</span><h3>Never imply your visuals are real</h3><p>Confusion is the injury. If a reasonable viewer could think your AI clip is actual footage, you're in the danger zone. Kill every LEAKED / REAL FOOTAGE / THIS JUST DROPPED framing — it's both the legal risk and the exact framing the takedowns targeted.</p></div>
+  <div class="fmt"><span class="num">Rule 02</span><h3>No logo, no title typography, no official art</h3><p>The wordmark and that distinctive lettering are trademarks. Not in thumbnails, banners, or ad creative. You can write the game's name in a normal font — nominative reference — without recreating the brand's visual identity.</p></div>
+  <div class="fmt"><span class="num">Rule 03</span><h3>Don't name your channel or product after the IP</h3><p>"GTA6Leaks" is a channel that gets taken down and a brand you can never sell. Build a name you own. This course is called The November Window, not "The GTA 6 Course," for exactly this reason.</p></div>
+  <div class="fmt"><span class="num">Rule 04</span><h3>Label AI content as AI</h3><p>Every major platform now has AI-disclosure requirements; failing to disclose is an independent violation stacked on top of any IP issue. Use the built-in label. It costs nothing and removes a whole category of risk — and it hurts performance far less than people assume once you're framed as commentary rather than leak.</p></div>
+  <div class="fmt"><span class="num">Rule 05</span><h3>Add commentary, don't repost</h3><p>Transformation is your friend. Official footage with your original analysis over it sits in a very different position than a silent reupload. Original voiceover, original script, original conclusions, meaningful reduction in source material used.</p></div>
+  <div class="fmt"><span class="num">Rule 06</span><h3>Build on generic, not specific</h3><p>An AI-generated neon Miami street at dusk is a generic aesthetic. A recognizable in-game location with the game's characters is protected expression. Learn the difference. You can evoke <em>vibe</em> — palm trees, sunset, 80s neon, Florida — all day. Nobody owns Miami at night.</p></div>
+  <div class="fmt"><span class="num">Rule 07</span><h3>Diversify accounts and platforms from day one</h3><p>Three accounts, three platforms. One strike shouldn't end your business. Basic hygiene, and almost nobody does it.</p></div>
+  <div class="fmt"><span class="num">Rule 08</span><h3>Own your audience</h3><p>Email list from week one. If every platform account vanished tonight, a list of 5,000 buyers is still a business.</p></div>
+
+  <h3>The five lanes enforcement doesn't touch</h3>
+  <ol>
+    <li><strong>News and analysis</strong> — official announcements, trailers, pre-order data, industry impact. Journalism and commentary.</li>
+    <li><strong>Preparation and buying guidance</strong> — which edition, which console, hardware, storage, budgeting, upgrade decisions.</li>
+    <li><strong>Guides and mastery</strong> — post-launch how-to. Enormous, durable, highly monetizable.</li>
+    <li><strong>Culture and reaction</strong> — the phenomenon itself: economics, delays, other studios moving release dates.</li>
+    <li><strong>Original creative work</strong> — your own aesthetic, your own worlds, the <em>vibe</em> without the <em>IP</em>. Where AI generation is genuinely safe and genuinely differentiating.</li>
+  </ol>
+
+  <div class="callout"><span class="k">Not legal advice</span><p>This is a risk-reduction framework built on documented enforcement patterns, not a legal opinion. If you scale this into a real business, spend a few hundred dollars on an hour with an IP lawyer in your jurisdiction. Cheapest insurance you'll ever buy.</p></div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 03 ══════════ -->
+<section class="panel" id="p3">
+  <div class="eyebrow">Section 03</div>
+  <h1>Pick Your Lane</h1>
+  <p class="lede">You will pick <em>one</em>. Not three. One. You add formats after you have one that works.</p>
+
+  <div class="quiz">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:18px">Format finder · 3 questions</div>
+    <div class="q" data-q="own"><p>Will you own the game on day one?</p><div class="opts"><button class="opt" data-v="yes">Yes</button><button class="opt" data-v="no">No / not sure</button></div></div>
+    <div class="q" data-q="write"><p>Can you write 150 words of original analysis in 20 minutes?</p><div class="opts"><button class="opt" data-v="yes">Yes, comfortably</button><button class="opt" data-v="no">Not really</button></div></div>
+    <div class="q" data-q="hours"><p>Hours per week you'll actually commit?</p><div class="opts"><button class="opt" data-v="low">Under 5</button><button class="opt" data-v="mid">5–15</button><button class="opt" data-v="high">15+</button></div></div>
+    <div class="qres" id="qres"></div>
+  </div>
+
+  <h2>The seven formats</h2>
+
+  <div class="fmt" id="f1"><span class="num">Format 01</span><h3>The Countdown Authority</h3>
+  <p>One account whose entire identity is the countdown. Daily post: days remaining plus one genuine piece of news or context. Serialized content builds return viewers, and return viewers are what algorithms reward. Every post has a built-in reason to exist, with honest urgency baked in.</p>
+  <div class="rate"><span class="pip y">Revenue speed <b>Medium</b></span><span class="pip g">Cost <b>Very low</b></span><span class="pip g">Legal risk <b>Very low</b></span><span class="pip r">Post-wave value <b>Low</b></span></div></div>
+
+  <div class="fmt" id="f2"><span class="num">Format 02</span><h3>The Preparation Channel</h3>
+  <p>Everything a buyer needs to decide and prepare. Which edition. Console comparisons. Storage. Preload timing. Budgeting for an $80 game. What to do if you're on PC and there's no PC version. This is <strong>commercial-intent</strong> content — someone watching "which edition should I buy" is 30 seconds from a purchase. Highest-value viewer on the internet, best affiliate economics of the seven.</p>
+  <div class="rate"><span class="pip g">Revenue speed <b>Fast</b></span><span class="pip g">Cost <b>Low</b></span><span class="pip g">Legal risk <b>Very low</b></span><span class="pip y">Post-wave value <b>Medium</b></span></div></div>
+
+  <div class="fmt" id="f3"><span class="num">Format 03</span><h3>The Guide Machine</h3>
+  <p>Post-launch how-to at volume. Every mechanic, every question, answered in 30–60 seconds. Longest tail of any format — a guide published in November 2026 still gets views in 2028. Converts best to long-form, which is where the real CPMs live.</p>
+  <div class="rate"><span class="pip r">Revenue speed <b>Slow</b></span><span class="pip y">Cost <b>Medium</b></span><span class="pip g">Legal risk <b>Low</b></span><span class="pip g">Post-wave value <b>Very high</b></span></div></div>
+
+  <div class="fmt" id="f4"><span class="num">Format 04</span><h3>The Industry Analyst</h3>
+  <p>The business story. Pre-order revenue. Fiscal-year targets. Other studios moving release dates. Retail impact. The economics of an $80 game. The end of physical discs. Older, wealthier, more Western audience = dramatically higher CPMs, and far less competition because it requires you to actually think.</p>
+  <div class="rate"><span class="pip y">Revenue speed <b>Medium</b></span><span class="pip y">Cost <b>Medium</b></span><span class="pip g">Legal risk <b>Very low</b></span><span class="pip g">Post-wave value <b>Very high</b></span></div></div>
+
+  <div class="fmt" id="f5"><span class="num">Format 05</span><h3>The Aesthetic Channel</h3>
+  <p>Pure vibe. AI-generated neon Miami, sunset causeways, 80s Florida. No characters, no logos, no claims. Music-driven, no voiceover, infinitely scalable. Rides the <em>cultural</em> wave, not the IP — nobody owns Miami at night. Monetizes through music, prints, wallpaper packs, and the aesthetic-account economy.</p>
+  <div class="rate"><span class="pip r">Revenue speed <b>Slow</b></span><span class="pip g">Cost <b>Very low</b></span><span class="pip g">Legal risk <b>~Zero</b></span><span class="pip y">Post-wave value <b>Medium</b></span></div></div>
+
+  <div class="fmt" id="f6"><span class="num">Format 06</span><h3>The Reaction / Compilation Desk</h3>
+  <p>Aggregating and commenting on the discourse. Best theories, funniest takes, streamer reactions, what people got right. Infinite raw material, fastest possible production. <strong>But this carries the highest legal exposure of the seven</strong> — you're using other people's footage. Substantial commentary, short excerpts, credited sources. Never a straight repost.</p>
+  <div class="rate"><span class="pip g">Revenue speed <b>Fast</b></span><span class="pip g">Cost <b>Very low</b></span><span class="pip r">Legal risk <b>Medium</b></span><span class="pip r">Post-wave value <b>Low</b></span></div></div>
+
+  <div class="fmt" id="f7"><span class="num">Format 07</span><h3>The Money Channel</h3>
+  <p>Content about making money around the launch, aimed at other creators. Best monetization of any format because the audience buys business education. <strong>Caution:</strong> unsubstantiated earnings claims give you an FTC problem and an ad-account problem. Talk about method, not money.</p>
+  <div class="rate"><span class="pip g">Revenue speed <b>Fast</b></span><span class="pip g">Cost <b>Low</b></span><span class="pip y">Legal risk <b>Low</b></span><span class="pip g">Post-wave value <b>High</b></span></div></div>
+
+  <hr>
+  <h2>Platform allocation</h2>
+  <p>Don't post the same thing everywhere and call it strategy. Each platform has a different job.</p>
+  <table>
+    <thead><tr><th>Platform</th><th>Job</th><th>Volume</th><th>Money</th></tr></thead>
+    <tbody>
+      <tr><td>TikTok</td><td>Top of funnel, virality</td><td>3–6/day</td><td>Traffic → offers</td></tr>
+      <tr><td>IG Reels</td><td>Discovery, better buyer demo</td><td>2–4/day</td><td>Affiliates, DM funnel</td></tr>
+      <tr><td>YT Shorts</td><td>Discovery + feeds long-form</td><td>2–4/day</td><td>Feeding long-form</td></tr>
+      <tr><td>YT long-form</td><td>The actual money and asset</td><td>2–3/wk</td><td>AdSense, sponsors</td></tr>
+      <tr><td>X</td><td>News velocity, industry reach</td><td>5–15/day</td><td>Traffic, audience</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good"><span class="k">The insight most people miss</span><p>Short-form is a <strong>discovery</strong> mechanism, not a revenue mechanism. Its payouts are terrible. Its job is to find people and move them somewhere that pays — long-form, your list, or your offer. Treat every short as an ad for something else.</p></div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 04 ══════════ -->
+<section class="panel" id="p4">
+  <div class="eyebrow">Section 04</div>
+  <h1>The Stack</h1>
+  <p class="lede">Every beginner's instinct is to assemble the perfect toolkit. Wrong. Every hour evaluating tools is an hour not publishing. One tool per job, locked for 116 days.</p>
+
+  <h2>The seven jobs</h2>
+  <h3>01 — Research and script</h3>
+  <p>An AI assistant is your writing partner, not your writer. The workflow that actually produces good scripts: feed it <em>your</em> raw material and your angle; ask for structure not prose; <strong>rewrite the hook yourself, always</strong> (it's 80% of performance and AI hooks are recognizably generic); read it aloud and rewrite anything you stumble on.</p>
+  <div class="callout"><span class="k">Rule</span><p>Never publish a script you haven't touched. Pure AI output underperforms and viewers can feel it.</p></div>
+
+  <h3>02 — Voice</h3>
+  <p>Text-to-speech has crossed the quality threshold. Pick one voice and never change it — voice consistency <em>is</em> your brand identity in faceless content. Avoid the default narrator voices everyone uses; audiences are fatigued by them and they signal low effort. Slight imperfection beats perfection: natural pauses, varied pace. The $5–$25/month tier is fine.</p>
+
+  <h3>03 — Visuals</h3>
+  <p>Three sources, in order of preference: original AI-generated footage (generic scenes — safe and distinctive); licensed stock; short excerpts of official promotional material with commentary. <strong>Never</strong> AI content designed to look like real gameplay. Generate in batches of 20, keep the best 8. A 45-second video is 6–9 clips.</p>
+
+  <h3>04 — Assembly</h3>
+  <p>One editor. Learn its shortcuts. Build <strong>three templates</strong> and reuse them forever: (A) talking-points, (B) list/ranking, (C) countdown/news. Templates are the entire game — a templated video takes 12 minutes, an untemplated one takes 90.</p>
+
+  <h3>05 — Captions</h3>
+  <p>Auto-captions, always on, burned in. Non-negotiable — most short-form is watched muted. Style once, save the preset, never touch again.</p>
+
+  <h3>06 — Thumbnails <span class="dim">(long-form only)</span></h3>
+  <p>Three templates. High contrast, one face or object, 3–5 words max. <strong>No logos, no official art, no trademarked typography.</strong></p>
+
+  <h3>07 — Scheduling</h3>
+  <p>A scheduler is the difference between a hobby and a machine. Batch Sunday, schedule the week, spend weekdays on research and comments only.</p>
+
+  <hr>
+  <h2>The 20-minute production loop</h2>
+  <p>Time it. Over 25 minutes means your templates aren't tight enough.</p>
+<pre>00:00–00:04   Pull one item from your research doc
+00:04–00:09   Draft script (AI-assisted), rewrite the hook yourself
+00:09–00:12   Generate voiceover, listen once, regenerate if flat
+00:12–00:17   Drop into template, swap b-roll, adjust timing
+00:17–00:19   Auto-caption, quick styling pass
+00:19–00:20   Export, queue with title / description / hashtags</pre>
+  <p><strong>Batch day:</strong> Sunday, 4 hours = 12–15 videos = a full week of daily posting across two platforms, with buffer.</p>
+
+  <h2>The research doc — your unfair advantage</h2>
+  <p>Open one document. Call it <strong>INVENTORY</strong>. Every news item, stat, good comment-section question, or community argument becomes one line in it. Keep <strong>30+ unused ideas</strong> at all times; below 15, you spend a session refilling.</p>
+  <div class="callout good"><span class="k">Why this matters more than it sounds</span><p>Never sit down to make content and have to think of what to make. That's where the hours die. Separate <em>idea capture</em> from <em>production</em> completely — different parts of your brain, and mixing them is why people burn out in week three.</p></div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 05 ══════════ -->
+<section class="panel" id="p5">
+  <div class="eyebrow">Section 05</div>
+  <h1>Hooks &amp; Retention</h1>
+  <p class="lede">Not likes. Not follows. <em>Watch time as a percentage of length</em> — and specifically retention in the first three seconds.</p>
+  <p>Every algorithm on every platform optimizes for one thing: keeping the user on the app. Your video is a candidate for that job. Retention is your application.</p>
+  <p><strong>Target:</strong> short-form under 45 seconds should hold 60%+ average view duration. Below 45%, the video is dead — don't try to save it, make a better one.</p>
+
+  <h2>The six hook patterns</h2>
+  <p>You have <strong>three literal seconds</strong> before the thumb moves.</p>
+  <div class="fmt"><h4>1 — Open a loop</h4><p>State something incomplete that requires the rest to resolve.<br><span class="dim">"There's one edition almost nobody should buy, and it's not the cheap one."</span></p></div>
+  <div class="fmt"><h4>2 — Contradict an assumption</h4><p>Take the default belief and reverse it.<br><span class="dim">"Everyone's telling you to pre-order now. Here's why waiting until November 12 is objectively better."</span></p></div>
+  <div class="fmt"><h4>3 — Deliver a number</h4><p>Specific numbers are inherently credible and inherently curious.<br><span class="dim">"Four other studios moved their release dates to get out of the way of one game."</span></p></div>
+  <div class="fmt"><h4>4 — Name the enemy</h4><p>Give the audience something to be against.<br><span class="dim">"The reason there's no PC version at launch has nothing to do with development difficulty."</span></p></div>
+  <div class="fmt"><h4>5 — Create time pressure</h4><p>Real deadlines only.<br><span class="dim">"You have 116 days, and three things matter in the first week."</span></p></div>
+  <div class="fmt"><h4>6 — Ask the question they're already asking</h4><p>Mirror the search query directly.<br><span class="dim">"Is the $99 edition actually worth twenty extra dollars?"</span></p></div>
+
+  <h2>The retention structure</h2>
+<pre>0:00–0:03   HOOK        the six patterns above
+0:03–0:08   STAKES      why this matters to them specifically
+0:08–0:35   PAYOFF      deliver, but hold one detail back
+0:35–0:42   OPEN LOOP   the held-back detail, teased
+0:42–0:45   CTA         one action, one only</pre>
+
+  <h3>Three techniques that measurably lift retention</h3>
+  <ul>
+    <li><strong>Pattern interrupt every 4–6 seconds.</strong> A cut, zoom, text pop, sound. Not decoration — a reset of the attention clock.</li>
+    <li><strong>Never front-load context.</strong> Start in the middle of the interesting part. Explain after you've earned attention.</li>
+    <li><strong>Never say "in this video I'll…"</strong> You've just told them they can leave and come back. They won't come back.</li>
+  </ul>
+
+  <h2>The CTA problem</h2>
+  <p>One CTA. Ever. "Follow for the daily countdown" <em>or</em> "link in bio" <em>or</em> "comment X" — never two.</p>
+  <div class="callout good"><span class="k">The highest-converting faceless CTA</span><p><strong>The comment-gate:</strong> "Comment WINDOW and I'll send you the checklist." It drives comments (algorithmic signal), opens a DM thread (platform-native, no external-link penalty), and a DM is a direct line to an email capture. This one mechanic is how most faceless operators build lists.</p></div>
+
+  <h2>The 60/30/10 mix</h2>
+  <ul>
+    <li><strong>60% volume content</strong> — your reliable templated format. Your floor.</li>
+    <li><strong>30% swing content</strong> — bigger idea, riskier hook. Most flop. One in ten changes your month.</li>
+    <li><strong>10% conversion content</strong> — explicitly sells. Only earned once the other 90% built trust.</li>
+  </ul>
+  <p>Most people do 100% volume and wonder why nothing takes off. A few do 100% swing and burn out. The mix is the strategy.</p>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 06 ══════════ -->
+<section class="panel" id="p6">
+  <div class="eyebrow">Section 06</div>
+  <h1>The Machine</h1>
+  <p class="lede">Faceless content is a <em>portfolio business</em>. Any individual video is a lottery ticket with unknown odds. The only reliable input is number of tickets.</p>
+
+  <table>
+    <thead><tr><th>Phase</th><th>Shorts/day</th><th>Long-form/wk</th><th>Platforms</th></tr></thead>
+    <tbody>
+      <tr><td>Phase 1 (now–Oct 15)</td><td>2–3</td><td>1</td><td>2</td></tr>
+      <tr><td>Phase 2 (Oct 15–Nov 11)</td><td>4–6</td><td>2</td><td>3</td></tr>
+      <tr><td>Phase 3 (Nov 12–Dec 31)</td><td>6–10</td><td>3</td><td>3+</td></tr>
+    </tbody>
+  </table>
+  <p>If those feel impossible, they are — <em>without templates and batching</em>. With them, Phase 1 is about 45 minutes a day plus a 4-hour Sunday.</p>
+
+  <h2>The weekly rhythm</h2>
+  <h3>Sunday — BATCH <span class="dim mono" style="font-size:12px">(4 hrs)</span></h3>
+  <p>Refill INVENTORY to 30+. Write 12–15 scripts. Generate all voiceovers. Assemble all videos. Schedule the entire week.</p>
+  <h3>Mon–Fri — OPERATE <span class="dim mono" style="font-size:12px">(30–45 min/day)</span></h3>
+  <p>Check yesterday's metrics. Respond to every comment in the first hour after posting — this materially affects distribution. Capture new INVENTORY items. Handle DMs and list capture.</p>
+  <h3>Saturday — REVIEW <span class="dim mono" style="font-size:12px">(1 hr)</span></h3>
+  <p>Pull the week's numbers. Identify your top 2 and bottom 2. Ask one question: <em>what did the top two have in common?</em> Feed the answer into next week's batch.</p>
+  <p>That's the whole operating system. Roughly 10 hours a week.</p>
+
+  <h2>Multi-account structure</h2>
+  <p>Three accounts minimum, <strong>differentiated</strong> not identical:</p>
+  <ul>
+    <li><strong>A — Primary.</strong> Best format, your brand, your monetization. Most effort.</li>
+    <li><strong>B — Variant.</strong> Same niche, different format. Tests whether the format or the niche is what's working.</li>
+    <li><strong>C — Experimental.</strong> Where you test hooks you're not confident in.</li>
+  </ul>
+  <p>Separate emails, separate devices or clean browser profiles, never cross-post identical files, don't link them publicly until one clearly wins. The point isn't gaming anything — it's redundancy and A/B testing.</p>
+
+  <h2>Reading your numbers</h2>
+  <p>Weekly, not daily. Daily checking makes you change things too fast and you never learn anything.</p>
+  <table>
+    <thead><tr><th>Metric</th><th>Healthy</th><th>If below</th></tr></thead>
+    <tbody>
+      <tr><td>3-second retention</td><td>70%+</td><td>Hook problem. Only fix hooks for two weeks.</td></tr>
+      <tr><td>Avg view duration</td><td>60%+</td><td>Body problem. Cut length by 30%.</td></tr>
+      <tr><td>Follows / 1k views</td><td>5+</td><td>Identity problem. Unclear what your account is.</td></tr>
+      <tr><td>Comments / 1k views</td><td>3+</td><td>No reason to engage. Add questions and gates.</td></tr>
+      <tr><td>Link CTR</td><td>1%+</td><td>CTA problem. One CTA, stated twice, on screen.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><span class="k">The one rule of iteration</span><p>Change one variable per week. Change three and you learn nothing.</p></div>
+
+  <h2>Burnout is the actual failure mode</h2>
+  <p>Almost nobody fails because the strategy was wrong. They fail because they stopped in week five when they'd made $14.</p>
+  <ol>
+    <li><strong>Decouple effort from results.</strong> Your Phase 1 job is publishing, not earning. Grade yourself on posts shipped. Dollars are a Phase 2–3 metric.</li>
+    <li><strong>The batch is sacred.</strong> If Sunday happens, the week happens. Protect that block harder than anything else.</li>
+    <li><strong>Expect the week-five wall.</strong> Around day 30–40 this will feel pointless. That feeling is scheduled and universal, and it arrives right before compounding starts. Know it's coming and you'll walk through it.</li>
+  </ol>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 07 ══════════ -->
+<section class="panel" id="p7">
+  <div class="eyebrow">Section 07</div>
+  <h1>The Money</h1>
+  <p class="lede">Seven rails, ranked by speed to first dollar. Run several at once — that's the whole point of "stack."</p>
+
+  <div class="fmt"><span class="num">Rail 01 · Fastest</span><h3>Affiliate commissions</h3>
+  <p>Not the game — publisher margins are thin to nonexistent. Everything <em>around</em> it: consoles and bundles, controllers, headsets, capture cards, <strong>storage expansion</strong> (huge — modern titles are enormous and it's a high-intent purchase), chairs, monitors, TVs, gift cards, subscriptions.</p>
+  <p>Zero product creation, works day one, and "which edition / what do I need" content is already commercial-intent traffic. One link in bio, a simple page with 8–10 recommendations, content that naturally arrives at a recommendation. Disclose the relationship — legally required and it costs almost nothing in conversion.</p></div>
+
+  <div class="fmt"><span class="num">Rail 02</span><h3>Platform creator programs</h3>
+  <p>Enroll in every one you qualify for — but set expectations correctly: <strong>supplementary income, not the business.</strong> Payouts vary enormously by platform, audience geography, and category, and gaming/youth audiences trend low. The exception is <strong>long-form YouTube</strong>, where ad revenue is an order of magnitude better per view. That's why shorts are advertising for your long-form.</p></div>
+
+  <div class="fmt"><span class="num">Rail 03 · Highest margin</span><h3>Your own digital product</h3>
+  <p>Where the real money is, and the rail almost nobody runs because it feels hard. It isn't. A preparation guide ($9–19). A launch-week strategy guide ($19–29, sold in the 10 days before release). Wallpaper and aesthetic packs ($5–12, near-zero cost with AI generation). A paid notification service — Discord or SMS for news the moment it breaks ($5/mo). Post-launch guide compilations ($19–39).</p>
+  <p>Margin is ~97%. Ten sales a day of a $19 product is $5,700 a month from an audience of a few thousand. <strong>Critical:</strong> your product must not use the IP. Same rules as Section 02.</p></div>
+
+  <div class="fmt"><span class="num">Rail 04 · Highest per unit</span><h3>Brand deals and UGC</h3>
+  <p>Accessory brands, energy drinks, VPNs, mobile games, hardware makers all spend heavily in this window because they know where the attention is going. You don't need a million followers — brands buy <em>audience quality and relevance</em>, and a 15k account with a defined, high-intent audience in a launch window can command $200–$800 per post.</p>
+  <p><strong>UGC is the underrated version:</strong> you make content for <em>them</em> to post on <em>their</em> channels, and you need no audience at all. $150–$500 per video. Start outreach in <strong>early October</strong> — budgets get allocated ahead of the window. Appendix E has the exact emails to send.</p></div>
+
+  <div class="fmt"><span class="num">Rail 05</span><h3>Traffic redirection</h3>
+  <p>Your short-form audience is a raw resource. Move it somewhere worth more: shorts → long-form (10–20× revenue per view); shorts → email list (sell repeatedly, forever); shorts → Discord (community, recurring revenue); shorts → a niche site or newsletter carrying its own ads.</p>
+  <p>The email list is the single most valuable asset you'll build in 116 days. Platform reach is rented; the list is owned.</p></div>
+
+  <div class="fmt"><span class="num">Rail 06 · Largest single payout</span><h3>Selling the asset</h3>
+  <p>Aged, monetized, topically relevant accounts get bought and sold, typically at 12–30× monthly profit depending on platform, niche, and revenue transferability. A channel doing $2,000/month in verifiable revenue by early 2027 is plausibly a $24,000–$60,000 asset.</p>
+  <p>To make it saleable: clean books from day one, revenue not dependent on your face or personality (faceless is a feature here), documented processes, and no IP-infringement history in the account's record.</p></div>
+
+  <div class="fmt"><span class="num">Rail 07</span><h3>Teaching the method</h3>
+  <p>Once you have a system that works, the system is a product. Legitimate when — and only when — you've actually done the thing.</p>
+  <div class="callout warn" style="margin:14px 0 0"><span class="k">Hard line</span><p>Don't sell "how to make money" before you've made money. Not for the ethics lecture — because it gives you FTC exposure, ad-account bans, chargebacks, and a merchant-account shutdown that kills every other rail simultaneously. Earn the right first.</p></div></div>
+
+  <h2>The stack in sequence</h2>
+  <table>
+    <thead><tr><th>Phase</th><th>Active rails</th></tr></thead>
+    <tbody>
+      <tr><td>Phase 1</td><td>Rail 1 (affiliates), Rail 5 (list building)</td></tr>
+      <tr><td>Phase 2</td><td>Add Rail 3 (product), Rail 4 (brand outreach), Rail 2 (programs)</td></tr>
+      <tr><td>Phase 3</td><td>All rails firing. Maximum volume, maximum offers.</td></tr>
+      <tr><td>Phase 4</td><td>Rails 2 + 3 + 6. Consider selling.</td></tr>
+    </tbody>
+  </table>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 08 ══════════ -->
+<section class="panel" id="p8">
+  <div class="eyebrow">Section 08</div>
+  <h1>Launch Week War Plan</h1>
+  <p class="lede">The 50 days from November 12 to December 31 will produce more revenue than the preceding 80 combined — <em>if</em> everything is already built.</p>
+  <div class="callout"><span class="k">The rule of Phase 3</span><p><strong>Build nothing. Sell everything.</strong></p></div>
+
+  <h2>Pre-flight checklist</h2>
+  <p>All of this must exist by <strong>November 5</strong>. Tick as you go.</p>
+  <div class="check" data-ck="preflight">
+    <div class="check-hd"><b>Pre-flight · by Nov 5</b><span class="cnt">0 / 11</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Three accounts, active 60+ days, posting daily</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">All three templates finalized and tested</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">40+ videos pre-produced and scheduled for Nov 12–25</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Email list live with an automated welcome sequence</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Affiliate landing page live, every link tested</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Your digital product finished, priced, on a working checkout</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Brand outreach sent — minimum 20 emails, sent in early October</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Payment processing tested with a real transaction</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Backup accounts created and warmed in case of a strike</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">INVENTORY doc holding 60+ ideas</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Your day-19 plan written down hour by hour</span></div>
+  </div>
+
+  <h2>The calendar</h2>
+
+  <h3>Nov 12 — Preload day</h3>
+  <p>Preload opens. First real surge. Content: "Preload is live — here's exactly what to do." Storage requirements, download size, common errors.</p>
+  <div class="callout good"><span class="k">Highest affiliate day of the campaign</span><p>People are discovering right now that they don't have enough storage. Have the recommendations ready and pinned.</p></div>
+
+  <h3>Nov 13–18 — The approach</h3>
+  <p>Peak anticipation. Review embargo likely lifts. Early impressions land. Daily countdown, review roundups, last-minute prep, launch-night plans. <strong>Volume: 6–8 posts/day</strong> — the steepest part of the curve. Push your product hard here; buying intent peaks <em>before</em> launch, not after.</p>
+
+  <h3>Nov 19 — Launch day</h3>
+  <p>The largest single day of consumer attention in gaming history. Go live if you can. Post every 2–3 hours: server status, install issues, first impressions, early tips. <strong>Have 10 videos pre-made and scheduled</strong> so you can spend the day reacting to what actually happens instead of producing.</p>
+
+  <h3>Nov 20–26 — The first week</h3>
+  <p>Everyone's playing. Everyone's stuck on something. <strong>Pivot hard to guides.</strong> Every question in your comments is a video — mine your own comment section, it's the best keyword research tool you'll ever have.</p>
+
+  <h3>Nov 27–30 — Black Friday</h3>
+  <p>The commercial peak of the year collides with the peak of the wave. Deals content, accessory recommendations, bundle comparisons. <strong>Your single highest-revenue affiliate window of the year.</strong> Prepare it in early November.</p>
+
+  <h3>Dec 1–24 — The gift window</h3>
+  <p>Purchase intent stays elevated. Console bundles, gift cards, accessories. Gift guides, "what to get the person who just got the game," continued guides.</p>
+
+  <h3>Dec 25–31 — The second wave</h3>
+  <p>Millions of new consoles are opened on the 25th. A brand-new cohort of first-time players arrives, all needing beginner content. <strong>Most creators are exhausted and coasting by now.</strong> Excellent traffic, almost no competition.</p>
+
+  <h2>Phase 3 discipline</h2>
+  <ol>
+    <li><strong>No new formats.</strong> You test in Phase 1, you execute in Phase 3.</li>
+    <li><strong>No new platforms.</strong> Adding one in November means starting a cold account during your highest-value window.</li>
+    <li><strong>No days off.</strong> 50 days. Rest in January. This is the whole point of the preceding 80.</li>
+  </ol>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ 09 ══════════ -->
+<section class="panel" id="p9">
+  <div class="eyebrow">Section 09</div>
+  <h1>The Pivot</h1>
+  <p class="lede">The mistake almost everyone makes: they build a channel about one event, the event ends, the traffic dies, and they delete it and start over — throwing away the asset in the exact month it became valuable.</p>
+  <p>By January you'll have something you couldn't buy: an <strong>aged, monetized, topically authoritative channel</strong> with a real audience and a track record. Aged accounts get better distribution than new ones. That's the asset.</p>
+
+  <h2>Four viable pivots</h2>
+  <div class="fmt"><span class="num">Pivot 01 · Easiest</span><h3>Go deeper</h3><p>Stay on the same subject. Post-launch has years of runway: the online component, updates, DLC, and the PC port when it arrives — historically 6–18 months later, likely sometime in 2027, and it will be its own launch event with its own wave. <span class="dim">Best for Format 03 guide channels.</span></p></div>
+  <div class="fmt"><span class="num">Pivot 02</span><h3>Go wider</h3><p>Broaden from one title to the category. "The launch analysis channel" becomes "the gaming analysis channel." Your audience is already gaming-interested; you're just expanding the subject. <span class="dim">Best for Format 04 analyst channels.</span></p></div>
+  <div class="fmt"><span class="num">Pivot 03</span><h3>Go to the next event</h3><p>You now have a repeatable system for event-driven content. There is always a next event with a published date. Point the machine at it — your channel becomes "the launch-window channel." <span class="dim">Best for anyone who ran the full 116 days.</span></p></div>
+  <div class="fmt"><span class="num">Pivot 04</span><h3>Sell it</h3><p>January–March 2027 is the right window: revenue documented, channel aged, buyer sees a proven asset. See Rail 06.</p></div>
+
+  <h2>What you actually walk away with</h2>
+  <p>Run this properly for 116 days and on January 1 you own:</p>
+  <ul>
+    <li>Three aged social accounts with real audiences</li>
+    <li>An email list of buyers — the most durable asset in the operation</li>
+    <li>A production system that turns an idea into a published video in 20 minutes</li>
+    <li>Templates, prompts, and a batching rhythm that transfer to any subject</li>
+    <li>A digital product you can relaunch, rewrite, or repoint at anything</li>
+    <li>Documented revenue and a saleable asset</li>
+  </ul>
+  <div class="callout good"><span class="k">If you take one thing</span><p>The game is the <strong>occasion</strong>. The machine is the <strong>outcome</strong>.</p></div>
+
+  <hr>
+  <h2>Final word</h2>
+  <p>116 days is not a long time. It's about 16 Sundays.</p>
+  <p>The people who make money in this window won't be the ones with the best tools, the best ideas, or the biggest head start. They'll be the ones who ship on the sixteenth Sunday the same way they shipped on the first.</p>
+  <p>Everything in this course is downstream of that. Start today — the countdown doesn't pause while you decide.</p>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ A ══════════ -->
+<section class="panel" id="pa">
+  <div class="eyebrow">Appendix A</div>
+  <h1>40 Hooks</h1>
+  <p class="lede">Filter by category, copy, adapt. Don't use them verbatim — the mechanism transfers, the wording shouldn't.</p>
+  <div class="filters" id="hookFilters">
+    <button class="fl on" data-f="all">All</button>
+    <button class="fl" data-f="prep">Preparation</button>
+    <button class="fl" data-f="ind">Industry</button>
+    <button class="fl" data-f="cd">Countdown</button>
+    <button class="fl" data-f="cur">Curiosity</button>
+    <button class="fl" data-f="gui">Guides</button>
+    <button class="fl" data-f="con">Contrarian</button>
+    <button class="fl" data-f="meta">Meta</button>
+  </div>
+  <div id="hookList"></div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ B ══════════ -->
+<section class="panel" id="pb">
+  <div class="eyebrow">Appendix B</div>
+  <h1>Prompt Library</h1>
+  <p class="lede">Six prompts that cover the whole production cycle. Copy, fill the brackets, run.</p>
+
+  <div class="snip"><div class="snip-hd"><b>Script generation</b><button class="cpy">Copy</button></div><pre>You're writing a 45-second faceless short-form script.
+Topic: [TOPIC]
+Audience: [WHO]
+Angle: [YOUR ORIGINAL TAKE — this must come from you]
+
+Structure:
+- 0-3s hook (curiosity or contradiction, no throat-clearing)
+- 3-8s stakes (why this matters to the viewer specifically)
+- 8-35s payoff (deliver, but hold one detail back)
+- 35-42s open loop (tease the held detail)
+- 42-45s single CTA
+
+Rules: conversational, no jargon, no "in this video."
+Short sentences. Return 3 hook variations at the end.</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>Hook multiplication</b><button class="cpy">Copy</button></div><pre>Here's a hook that worked: "[HOOK]"
+
+Give me 15 variations using the same psychological
+mechanism but different subject matter within [NICHE].
+Vary the structure. No two should open with the same word.</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>Comment mining</b><button class="cpy">Copy</button></div><pre>Here are 50 comments from my recent posts: [PASTE]
+
+Identify:
+(1) the 10 most common questions
+(2) 5 disagreements or arguments happening
+(3) 5 things people are confused about
+
+Rank each by how many people it likely affects.</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>Titles and descriptions</b><button class="cpy">Copy</button></div><pre>Video topic: [TOPIC]
+
+Give me 10 title options under 60 characters,
+optimized for search intent not clickbait.
+Then a 150-word description with natural keyword
+placement and a clear single CTA.</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>Repurposing</b><button class="cpy">Copy</button></div><pre>Here's a long-form script: [PASTE]
+
+Extract 5 standalone short-form moments.
+Each must work with zero context from the original.
+Give me the hook and the 30-second body for each.</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>Weekly review</b><button class="cpy">Copy</button></div><pre>Here are this week's numbers: [PASTE]
+
+Identify what my top 2 videos had in common that my
+bottom 2 didn't. Be specific about hook structure,
+topic type, and length.
+
+Give me one change to test next week. Only one.</pre></div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ C ══════════ -->
+<section class="panel" id="pc">
+  <div class="eyebrow">Appendix C</div>
+  <h1>The 30-Day Calendar</h1>
+  <p class="lede">Your first 30 days, starting today. Tick each one off. By day 30 you should have 70+ pieces published, a working system, a list started, affiliates live, and a product near-done.</p>
+
+  <div class="check" data-ck="w1">
+    <div class="check-hd"><b>Week 1 · Setup</b><span class="cnt">0 / 7</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 1</b> — Pick your format. Register three accounts. Name them something you own.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 2</b> — Build Template A. Make one video. Publish it. It'll be bad. Publish it anyway.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 3</b> — Build Templates B and C.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 4</b> — Set up voice, captions, scheduler. Lock the stack. No more tool shopping.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 5</b> — Fill INVENTORY to 30 ideas.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 6</b> — Set up email capture and the comment-gate CTA.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 7</b> — First batch. 10 videos. Schedule the week.</span></div>
+  </div>
+
+  <div class="check" data-ck="w2">
+    <div class="check-hd"><b>Week 2 · Rhythm</b><span class="cnt">0 / 3</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Days 8–13</b> — Post 2–3/day. Respond to every comment. Add 5 INVENTORY items daily.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 14</b> — First review. Top 2 vs bottom 2. Write down the difference.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Second batch day completed</span></div>
+  </div>
+
+  <div class="check" data-ck="w3">
+    <div class="check-hd"><b>Week 3 · Affiliates</b><span class="cnt">0 / 5</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 15</b> — Apply to affiliate programs. Build the recommendations landing page.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 16</b> — First affiliate-integrated video.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Days 17–20</b> — Keep posting. Test one new hook style.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 21</b> — Batch + review. Volume to 3/day.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">INVENTORY still above 30</span></div>
+  </div>
+
+  <div class="check" data-ck="w4">
+    <div class="check-hd"><b>Week 4 · Long-form and product</b><span class="cnt">0 / 6</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 22</b> — First long-form video (5–8 min), assembled from your best shorts.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 23</b> — Outline your digital product.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Days 24–27</b> — Keep posting. Draft the product.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 28</b> — Second long-form.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 29</b> — Finish the product. Set up checkout.</span></div>
+    <div class="ck"><span class="box"></span><span class="txt"><b>Day 30</b> — Full review. Kill what's losing. Double down on what's working. Set Phase 2 targets.</span></div>
+  </div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ D ══════════ -->
+<section class="panel" id="pd">
+  <div class="eyebrow">Appendix D</div>
+  <h1>Strike-Proofing</h1>
+  <p class="lede">Run this against every piece of content before publishing. Ten seconds. This is the checklist that keeps you alive through November.</p>
+
+  <div class="check" data-ck="strike">
+    <div class="check-hd"><b>Pre-publish check</b><span class="cnt">0 / 8</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Nothing implies this is real, leaked, or official</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">No logo, no official title typography anywhere in it</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">AI-generated content is labeled with the platform's AI tool</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Any official footage used is short, and carries substantial original commentary</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Account name, handle, and product name contain no trademark</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">Affiliate disclosure present where required</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">No income claim I can't substantiate</span></div>
+    <div class="ck"><span class="box"></span><span class="txt">If this account vanished tonight, I'd still have the audience</span></div>
+  </div>
+
+  <div class="callout warn">
+    <span class="k">The one that catches people</span>
+    <p>Number five. Everyone remembers to clean up their content and forgets their <em>handle</em> is the thing with the trademark in it. Fix that before you build an audience on it, because you can't change it later without losing everything.</p>
+  </div>
+  <div class="pfoot"></div>
+</section>
+
+<!-- ══════════ E ══════════ -->
+<section class="panel" id="pe">
+  <div class="eyebrow">Appendix E</div>
+  <h1>Outreach Scripts</h1>
+  <p class="lede">Section 07 tells you to send 20 brand emails in early October. These are the emails. Copy, fill the brackets, send. Short beats clever — the person reading these gets fifty pitches a week.</p>
+
+  <h2>Before you send anything</h2>
+  <ul>
+    <li><strong>Find the right inbox.</strong> "partnerships@", "creators@", or the marketing manager on LinkedIn. A pitch to a generic support inbox is a deleted pitch.</li>
+    <li><strong>One number, one link.</strong> Your best relevant metric and your account. Don't attach a five-page media kit to a cold email.</li>
+    <li><strong>Pitch the window, not yourself.</strong> The reason to reply is that their buyers' attention is about to spike on a known date and you're already standing where it lands.</li>
+  </ul>
+
+  <div class="snip"><div class="snip-hd"><b>Brand deal pitch · cold</b><button class="cpy">Copy</button></div><pre>Subject: [NICHE] audience, peaking Nov 12–Dec 31 — [BRAND] fit
+
+Hi [NAME],
+
+I run [ACCOUNT], a [NICHE] account covering the November 19
+launch window — currently [FOLLOWERS] followers and
+[VIEWS]/month, audience mostly [DEMO].
+
+Attention in this category peaks between preload (Nov 12) and
+end of December, and my content calendar for that stretch is
+already built. [BRAND] fits naturally into my
+[CONTENT TYPE — e.g. setup guides / buying guides].
+
+Rate for a dedicated post is [$X]; integration into an
+existing format is [$Y]. Happy to send recent performance
+screenshots.
+
+Worth a quick call this week?
+
+[NAME]
+[LINK TO ACCOUNT]</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>UGC pitch · no audience needed</b><button class="cpy">Copy</button></div><pre>Subject: Launch-window UGC for [BRAND] — 3 sample concepts
+
+Hi [NAME],
+
+I make short-form video in the [NICHE] space and I'm
+producing daily through the November launch window.
+
+I'd like to make content for [BRAND]'s own channels — you
+post it, you run it as ads, no audience of mine required.
+Three concepts I'd start with:
+
+1. [CONCEPT — e.g. "storage upgrade in 30 seconds" demo]
+2. [CONCEPT]
+3. [CONCEPT]
+
+Rate is [$X] per finished video, [$Y] for a three-pack,
+usage rights included. Portfolio: [LINK]
+
+Can I send you one on spec?
+
+[NAME]</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>Follow-up · send 5–7 days later</b><button class="cpy">Copy</button></div><pre>Subject: Re: [ORIGINAL SUBJECT]
+
+Hi [NAME] — floating this back up.
+
+One update since I wrote: [NEW METRIC OR WIN — e.g. "last
+week's edition-comparison video did 240k views"].
+
+The window I mentioned starts Nov 12. Creative needs about
+two weeks of lead, so this week is the natural cut-off for
+a December-quality slot.
+
+Either way, a one-line "not this quarter" is a completely
+fine answer.
+
+[NAME]</pre></div>
+
+  <div class="callout"><span class="k">Cadence</span><p>20 emails in week one of October. One follow-up each after 5–7 days. Expect 2–4 real conversations per 20 sends — that's a normal hit rate, not a failure. Stop following up after one bump; move the energy to the next 20.</p></div>
+
+  <h2>Disclosure lines</h2>
+  <p>Required, and cheaper than the alternative. Put the affiliate line in every description or bio that carries a link, and say the sponsorship line out loud <em>and</em> use the platform's paid-partnership label.</p>
+
+  <div class="snip"><div class="snip-hd"><b>Affiliate disclosure</b><button class="cpy">Copy</button></div><pre>Some links here are affiliate links — if you buy through
+them I may earn a commission at no extra cost to you.
+I only recommend gear I'd tell a friend to buy.</pre></div>
+
+  <div class="snip"><div class="snip-hd"><b>Sponsored content disclosure</b><button class="cpy">Copy</button></div><pre>This video is sponsored by [BRAND]. They paid for the
+placement; the opinions and the recommendation criteria
+are mine.</pre></div>
+
+  <div class="callout warn"><span class="k">Hard line</span><p>Never invent metrics in a pitch. A brand can see your public numbers in ten seconds, and a padded number costs you the deal <em>and</em> the relationship. If your numbers are small, sell relevance and the window instead — that's the honest version of the same pitch, and in October it's genuinely compelling.</p></div>
+  <div class="pfoot"></div>
+</section>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   PERSISTENCE
+   Progress (section completions, checklists, last section
+   viewed) is saved to the buyer's browser via localStorage.
+   Wrapped in try/catch so it degrades to in-memory when
+   storage is unavailable (private mode, file://, etc.).
+   ═══════════════════════════════════════════════════════════ */
+(function(){
+'use strict';
+
+var TARGET = new Date(2026,10,19,0,0,0).getTime();
+var pad = function(n){return String(n).padStart(2,'0');};
+var $  = function(s,r){return (r||document).querySelector(s);};
+var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+
+var state = { done:{}, checks:{}, last:'p0' };
+try{
+  var saved = JSON.parse(localStorage.getItem('nw'));
+  if(saved && typeof saved === 'object'){
+    state.done   = saved.done   || {};
+    state.checks = saved.checks || {};
+    state.last   = saved.last   || 'p0';
+  }
+}catch(e){}
+function save(){
+  try{ localStorage.setItem('nw', JSON.stringify(state)); }catch(e){}
+}
+
+/* ── toast ─────────────────────────────── */
+var toastEl = $('#toast'), toastT;
+function toast(msg){
+  toastEl.textContent = msg; toastEl.classList.add('up');
+  clearTimeout(toastT); toastT = setTimeout(function(){toastEl.classList.remove('up');},1600);
+}
+
+/* ── clock + phase ─────────────────────── */
+var PHASES = [
+  {n:'Phase 01', t:'Build',       s:'Now → Oct 15',   end:new Date(2026,9,15)},
+  {n:'Phase 02', t:'Surge',       s:'Oct 15 → Nov 11',end:new Date(2026,10,11)},
+  {n:'Phase 03', t:'Detonation',  s:'Nov 12 → Dec 31',end:new Date(2026,11,31)},
+  {n:'Phase 04', t:'Harvest',     s:'Jan 2027 →',     end:new Date(2099,0,1)}
+];
+function currentPhase(){
+  var now = Date.now();
+  for(var i=0;i<PHASES.length;i++){ if(now <= PHASES[i].end.getTime()) return i; }
+  return 3;
+}
+function buildStrip(){
+  var cur = currentPhase(), html='';
+  PHASES.forEach(function(p,i){
+    html += '<div class="pz'+(i===cur?' now':'')+'">'+
+      '<div class="pn">'+p.n+'</div><b>'+p.t+'</b><span>'+p.s+'</span>'+
+      (i===cur?'<div class="badge">You are here</div>':'')+'</div>';
+  });
+  $('#strip').innerHTML = html;
+}
+function tick(){
+  var diff = TARGET - Date.now();
+  if(diff <= 0){
+    $('#clock').textContent = 'LAUNCHED';
+    $('#sundays').textContent = '0';
+  } else {
+    var d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000),
+        m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+    $('#clock').textContent = d+'d '+pad(h)+':'+pad(m)+':'+pad(s);
+    $('#sundays').textContent = Math.ceil(d/7);
+  }
+  var p = PHASES[currentPhase()];
+  $('#phaseNow').textContent = p.t;
+}
+
+/* ── navigation ────────────────────────── */
+var navLinks = $$('.nav a'), panels = $$('.panel');
+var order = navLinks.map(function(a){return a.dataset.p;});
+var current = 'p0';
+
+function show(id){
+  if(order.indexOf(id) === -1) id = 'p0';
+  current = id;
+  panels.forEach(function(p){p.classList.toggle('on', p.id===id);});
+  navLinks.forEach(function(a){
+    var on = a.dataset.p===id;
+    a.classList.toggle('on', on);
+    if(on){ a.setAttribute('aria-current','page'); } else { a.removeAttribute('aria-current'); }
+  });
+  window.scrollTo(0,0);
+  $('#nav').classList.remove('open'); $('#scrim').classList.remove('on');
+  renderFoot(id);
+  state.last = id; save();
+}
+/* deep-linkable sections: the URL hash is the source of truth,
+   so back/forward and shared links both work */
+function go(id){
+  if(location.hash === '#'+id){ show(id); }
+  else { location.hash = id; }
+}
+navLinks.forEach(function(a){
+  a.href = '#'+a.dataset.p;
+  a.addEventListener('click',function(e){e.preventDefault();go(a.dataset.p);});
+});
+window.addEventListener('hashchange',function(){ show(location.hash.slice(1)); });
+
+/* ── progress ──────────────────────────── */
+function refreshProgress(){
+  var n = Object.keys(state.done).filter(function(k){return state.done[k];}).length;
+  var pct = Math.round(n/order.length*100);
+  $('#progBar').style.width = pct+'%';
+  $('#progTxt').textContent = n+' / '+order.length;
+  navLinks.forEach(function(a){a.classList.toggle('done', !!state.done[a.dataset.p]);});
+}
+function renderFoot(id){
+  var i = order.indexOf(id), foot = $('#'+id+' .pfoot');
+  if(!foot) return;
+  var prev = i>0 ? order[i-1] : null, next = i<order.length-1 ? order[i+1] : null;
+  var isDone = !!state.done[id];
+  foot.innerHTML =
+    (prev ? '<button class="btn sec" data-go="'+prev+'">← Back</button>' : '<span></span>') +
+    '<button class="btn '+(isDone?'done-b':'')+'" data-mark="'+id+'">'+(isDone?'✓ Completed':'Mark complete')+'</button>' +
+    (next ? '<button class="btn sec" data-go="'+next+'">Next →</button>' : '<span></span>');
+}
+document.addEventListener('click',function(e){
+  var nav = e.target.closest('[data-go]'), mk = e.target.closest('[data-mark]');
+  if(nav){ go(nav.dataset.go); }
+  if(mk){
+    var id = mk.dataset.mark;
+    state.done[id] = !state.done[id]; save();
+    refreshProgress(); renderFoot(id);
+    if(state.done[id]) toast('Section complete');
+  }
+});
+
+/* ── checklists ────────────────────────── */
+$$('.check').forEach(function(box){
+  var key = box.dataset.ck, items = $$('.ck', box), cnt = $('.cnt', box);
+  state.checks[key] = state.checks[key] || {};
+  function paint(){
+    var n=0;
+    items.forEach(function(it,i){
+      var on = !!state.checks[key][i];
+      it.classList.toggle('done', on);
+      it.setAttribute('aria-checked', on ? 'true' : 'false');
+      if(on) n++;
+    });
+    cnt.textContent = n+' / '+items.length;
+    cnt.style.color = (n===items.length) ? 'var(--pool)' : 'var(--sun)';
+  }
+  items.forEach(function(it,i){
+    it.setAttribute('role','checkbox');
+    it.setAttribute('tabindex','0');
+    function toggle(){
+      state.checks[key][i] = !state.checks[key][i]; save(); paint();
+    }
+    it.addEventListener('click',toggle);
+    it.addEventListener('keydown',function(e){
+      if(e.key===' ' || e.key==='Enter'){ e.preventDefault(); toggle(); }
+    });
+  });
+  paint();
+});
+
+/* ── copy buttons ──────────────────────── */
+$$('.cpy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var txt = b.closest('.snip').querySelector('pre').innerText;
+    var done = function(){ b.textContent='Copied'; b.classList.add('ok'); toast('Copied to clipboard');
+      setTimeout(function(){b.textContent='Copy'; b.classList.remove('ok');},1600); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, fallback);
+    } else { fallback(); }
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try{document.execCommand('copy'); done();}catch(err){toast('Copy failed');}
+      document.body.removeChild(ta);
+    }
+  });
+});
+
+/* ── hooks ─────────────────────────────── */
+var HOOKS = [
+ ['prep',"There's one edition almost nobody should buy, and it's not the cheap one."],
+ ['prep',"If you're planning to preload, do this first or you'll be waiting all night."],
+ ['prep',"Three things to do before November 12 that will save you a full day."],
+ ['prep',"The upgrade nobody tells you about, and it's under $60."],
+ ['prep',"Buying it as a gift? There's a mistake almost everyone is about to make."],
+ ['prep',"Everyone's pre-ordering right now. Here's the case for waiting."],
+ ['prep',"This is the exact storage math. Do it before launch week."],
+ ['prep',"Your setup has one bottleneck and it probably isn't what you think."],
+ ['ind',"Four studios moved their release dates to get out of the way of one game."],
+ ['ind',"The reason there's no PC version at launch has nothing to do with difficulty."],
+ ['ind',"This launch has an $80 price tag, and there's a specific reason why."],
+ ['ind',"A single game is now load-bearing for an entire company's fiscal year."],
+ ['ind',"Physical discs are quietly disappearing, and this launch is the reason."],
+ ['ind',"Here's what the pre-order numbers actually tell us."],
+ ['ind',"The delay cost more than you think, and the math is public."],
+ ['ind',"One company's stock moved on an AI demo. Here's what that revealed."],
+ ['cd',"116 days. Here are the three things that matter in the first week."],
+ ['cd',"The window closes in November and most people will miss it entirely."],
+ ['cd',"Everything we know, in 45 seconds, updated today."],
+ ['cd',"If you only watch one update this month, make it this one."],
+ ['cur',"There's a detail in the marketing nobody has picked up on."],
+ ['cur',"The most interesting thing about this launch isn't the game."],
+ ['cur',"Everyone got this prediction wrong, and the reason is fascinating."],
+ ['cur',"This one decision tells you exactly how confident the company is."],
+ ['gui',"You've been doing this wrong since hour one."],
+ ['gui',"The first thing you should do, and almost nobody does it."],
+ ['gui',"Stuck on this? It takes 20 seconds once you know."],
+ ['gui',"Five settings to change before you play another minute."],
+ ['gui',"The fastest method, tested three ways."],
+ ['gui',"This is hidden in a menu almost nobody opens."],
+ ['gui',"Beginner mistake that costs you hours later."],
+ ['gui',"Do this in your first session or you'll regret it in week two."],
+ ['con',"Unpopular opinion: waiting three months is the smarter play."],
+ ['con',"The hype is real but this specific expectation will disappoint people."],
+ ['con',"Everyone's excited about the wrong feature."],
+ ['con',"This isn't the biggest launch in history, and here's the actual metric."],
+ ['meta',"The people making money off this launch aren't playing it."],
+ ['meta',"A whole industry got shut down last month. Here's what replaced it."],
+ ['meta',"Why the 'leak' accounts are all disappearing."],
+ ['meta',"There's a legal way to do this and a way that gets you deleted."]
+];
+var hookHTML = HOOKS.map(function(h,i){
+  return '<div class="hook" data-cat="'+h[0]+'"><span class="hn">'+pad(i+1)+'</span>'+
+         '<span class="ht">'+h[1]+'</span>'+
+         '<button class="cpy hc" data-hook="'+i+'">Copy</button></div>';
+}).join('');
+$('#hookList').innerHTML = hookHTML;
+
+$$('#hookFilters .fl').forEach(function(b){
+  b.addEventListener('click',function(){
+    $$('#hookFilters .fl').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false');});
+    b.classList.add('on'); b.setAttribute('aria-pressed','true');
+    var f = b.dataset.f;
+    $$('.hook').forEach(function(h){
+      h.classList.toggle('hide', f!=='all' && h.dataset.cat!==f);
+    });
+  });
+});
+$$('[data-hook]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var txt = HOOKS[+b.dataset.hook][1];
+    var done=function(){b.textContent='Copied';b.classList.add('ok');toast('Hook copied');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('ok');},1400);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,done);}
+    else{done();}
+  });
+});
+
+/* ── format quiz ───────────────────────── */
+var ans = {};
+var FMT = {
+  1:['The Countdown Authority','Simple, serialized, 15 minutes a day. Learn the machine before you scale it.','f1'],
+  2:['The Preparation Channel','Commercial-intent traffic and the best affiliate economics of the seven. Monetizes before November.','f2'],
+  3:['The Guide Machine','Longest tail of any format. The asset that still pays in 2028.','f3'],
+  4:['The Industry Analyst','Highest ceiling and highest CPMs. Least competition, because it requires thinking.','f4'],
+  5:['The Aesthetic Channel','Near-zero legal exposure and near-zero production cost. Rides the culture, not the IP.','f5'],
+  7:['The Money Channel','Best monetization — but only once you have results you can actually point to.','f7']
+};
+$$('.q .opt').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q = b.closest('.q').dataset.q;
+    $$('.opt', b.closest('.q')).forEach(function(x){x.classList.remove('sel');x.setAttribute('aria-pressed','false');});
+    b.classList.add('sel'); b.setAttribute('aria-pressed','true'); ans[q]=b.dataset.v; evaluate();
+  });
+});
+function evaluate(){
+  if(!ans.own || !ans.write || !ans.hours) return;
+  var primary, pivot, second;
+  if(ans.hours==='low'){ primary = ans.write==='yes' ? 1 : 5; }
+  else if(ans.hours==='mid'){ primary = 2; }
+  else { primary = ans.write==='yes' ? 4 : 2; }
+
+  pivot  = ans.own==='yes' ? 3 : (primary===4 ? 4 : 2);
+  second = ans.write==='yes' ? (primary===4 ? 2 : 4) : 5;
+
+  var html =
+    row('Start here — build this now', primary) +
+    row('Pivot to this on November 19', pivot) +
+    row('Second account, once the first works', second) +
+    '<p class="dim" style="font-size:13.5px;margin-top:16px;margin-bottom:0">Build the primary only. Add the second account after the first has a format that consistently holds 60% view duration — not before.</p>';
+
+  var box = $('#qres'); box.innerHTML = html; box.classList.add('show');
+  $$('.fmt').forEach(function(f){f.classList.remove('hit');});
+  [primary,pivot,second].forEach(function(n){
+    var el = document.getElementById(FMT[n] ? FMT[n][2] : '');
+    if(el) el.classList.add('hit');
+  });
+  function row(label,n){
+    var f = FMT[n] || FMT[2];
+    return '<div class="rec"><span class="lbl">'+label+'</span><b>Format 0'+n+' — '+f[0]+'</b><span>'+f[1]+'</span></div>';
+  }
+}
+
+/* ── mobile nav ────────────────────────── */
+$('#menuBtn').addEventListener('click',function(){
+  $('#nav').classList.toggle('open'); $('#scrim').classList.toggle('on');
+});
+$('#scrim').addEventListener('click',function(){
+  $('#nav').classList.remove('open'); $('#scrim').classList.remove('on');
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ $('#nav').classList.remove('open'); $('#scrim').classList.remove('on'); }
+  if((e.key==='ArrowLeft' || e.key==='ArrowRight') && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey){
+    if(e.target.closest('input,textarea,select,[contenteditable]')) return;
+    var i = order.indexOf(current);
+    var j = e.key==='ArrowRight' ? i+1 : i-1;
+    if(j>=0 && j<order.length) go(order[j]);
+  }
+});
+
+/* ── reset ─────────────────────────────── */
+$('#resetBtn').addEventListener('click',function(){
+  if(!confirm('Reset all progress? This clears every section completion and checklist.')) return;
+  try{ localStorage.removeItem('nw'); }catch(e){}
+  location.reload();
+});
+
+/* ── boot ──────────────────────────────── */
+buildStrip(); tick(); setInterval(tick,1000);
+refreshProgress();
+var initial = location.hash.slice(1);
+if(order.indexOf(initial) === -1){
+  initial = order.indexOf(state.last) !== -1 ? state.last : 'p0';
+}
+show(initial);
+})();
+</script>
+</body>
+</html>
