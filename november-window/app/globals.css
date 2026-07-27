@@ -1,0 +1,51 @@
+/* Shared tokens — identical to the playbook so funnel and product match. */
+:root {
+  --ink: #071916; --ink-2: #0B2320; --surface: #0F2C27; --surface-2: #153A33;
+  --line: #255049; --line-soft: #1B3E38;
+  --sand: #EDE4D3; --sand-dim: #9FAFA7;
+  --sun: #FF7A1A; --pool: #3FD9C0; --alarm: #FF4560;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink); color: var(--sand);
+  font-family: "Chivo", system-ui, sans-serif;
+  font-size: 16.5px; line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .display {
+  font-family: "Big Shoulders Display", Impact, sans-serif;
+  font-weight: 800; line-height: 0.95; text-transform: uppercase;
+}
+.mono { font-family: "JetBrains Mono", monospace; }
+a { color: var(--pool); }
+
+.btn {
+  display: inline-block; background: var(--sun); color: #0a1614;
+  font-family: "Chivo", sans-serif; font-weight: 700; font-size: 15px;
+  padding: 15px 34px; border: 0; border-radius: 2px; cursor: pointer;
+  text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(255, 122, 26, 0.35); }
+.btn.ghost { background: transparent; color: var(--sand); border: 1px solid var(--line); }
+.btn.ghost:hover { border-color: var(--sun); box-shadow: none; }
+
+.eyebrow {
+  font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--sun);
+  margin-bottom: 16px;
+}
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+.field {
+  width: 100%; background: var(--ink-2); border: 1px solid var(--line);
+  color: var(--sand); font-family: "Chivo", sans-serif; font-size: 15.5px;
+  padding: 13px 16px; border-radius: 2px; outline: none;
+}
+.field:focus { border-color: var(--sun); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn:hover { transform: none; }
+}
