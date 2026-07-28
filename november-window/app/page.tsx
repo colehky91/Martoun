@@ -93,7 +93,7 @@ export default function Landing() {
         </div>
 
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="/api/checkout" className="btn">Get the playbook — $47</a>
+          <a href="/api/checkout" className="btn">Get the playbook — $97.99</a>
           <a href="#inside" className="btn ghost">See what&rsquo;s inside</a>
         </div>
       </section>
@@ -139,7 +139,7 @@ export default function Landing() {
           }}
         >
           <div className="display" style={{ fontSize: "3.4rem", fontWeight: 900 }}>
-            $47<span style={{ fontSize: "1.2rem", color: "var(--sand-dim)" }}> once</span>
+            $97.99<span style={{ fontSize: "1.2rem", color: "var(--sand-dim)" }}> once</span>
           </div>
           <ul style={{ listStyle: "none", margin: "24px 0 30px", textAlign: "left", color: "var(--sand-dim)", fontSize: 15 }}>
             {[

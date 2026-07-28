@@ -1,13 +1,13 @@
 # The November Window — course platform
 
 Membership site wrapping the interactive playbook (`content/playbook.html`).
-**Stack:** Next.js (App Router) · Vercel · Supabase (auth + DB) · Stripe ($47 one-time payment) · Resend (onboarding email) · Mux (video + watch tracking).
+**Stack:** Next.js (App Router) · Vercel · Supabase (auth + DB) · Stripe ($97.99 one-time payment) · Resend (onboarding email) · Mux (video + watch tracking).
 
 ## What's already built
 
 | Piece | Where | Status |
 |---|---|---|
-| Sales/landing page (countdown hero, curriculum, $47/mo pricing) | `app/page.tsx` | ✅ done |
+| Sales/landing page (countdown hero, curriculum, $97.99 one-time pricing) | `app/page.tsx` | ✅ done |
 | Magic-link login (no passwords) | `app/login/`, `app/auth/callback/` | ✅ done |
 | Paywall — playbook + dashboard gated to active subs / comps / admin | `app/course/layout.tsx`, `lib/access.ts` | ✅ done |
 | The playbook itself, served gated, **progress synced to Supabase** (was localStorage stubs) | `app/course/playbook/route.ts`, `content/playbook.html` | ✅ done |
@@ -45,7 +45,7 @@ git remote add origin <your-repo-url> && git push -u origin main
    ```
 
 ### 3. Stripe
-1. **Products → Add product**: "The November Window", one-time, **$47.00 USD**. Copy the `price_...` id → `STRIPE_PRICE_ID`.
+1. **Products → Add product**: "The November Window", one-time, **$97.99 USD**. Copy the `price_...` id → `STRIPE_PRICE_ID`.
 2. **Developers → API keys**: secret key → `STRIPE_SECRET_KEY`.
 3. **Developers → Webhooks → Add endpoint**: `https://yourdomain.com/api/stripe/webhook`, events:
    `checkout.session.completed` (the `customer.subscription.*` events are only needed if legacy

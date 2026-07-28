@@ -1,6 +1,6 @@
 # CLAUDE.md — project rules
 
-Membership site for "The November Window" ($47 one-time, lifetime access). Next.js App Router + Supabase + Stripe + Resend + Mux on Vercel.
+Membership site for "The November Window" ($97.99 one-time, lifetime access). Next.js App Router + Supabase + Stripe + Resend + Mux on Vercel.
 
 ## Non-negotiables
 - **Never hard-delete data.** Removals set `archived_at`. `progress_events` is append-only (no UPDATE/DELETE — RLS + revoked grants enforce this; don't work around it with the service role).

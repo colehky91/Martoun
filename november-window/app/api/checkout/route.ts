@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 
 /**
- * Creates a Stripe Checkout session for the one-time $47 purchase.
+ * Creates a Stripe Checkout session for the one-time $97.99 purchase.
  * GET so the landing-page CTA can be a plain link.
  */
 export async function GET(req: Request) {
