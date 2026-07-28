@@ -6,6 +6,7 @@ import { supabaseBrowser } from "@/lib/supabase/client";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errMsg, setErrMsg] = useState<string | null>(null);
 
   async function sendLink(e: React.FormEvent) {
     e.preventDefault();
@@ -18,6 +19,9 @@ export default function Login() {
         emailRedirectTo: `${window.location.origin}/auth/callback?next=/course`,
       },
     });
+    // "Signups not allowed" = the address has no account → genuine not-a-member.
+    // Anything else (rate limit, bad key, SMTP trouble) — show the real reason.
+    setErrMsg(error && !/signup/i.test(error.message) ? error.message : null);
     setStatus(error ? "error" : "sent");
   }
 
@@ -45,8 +49,14 @@ export default function Login() {
             </button>
             {status === "error" && (
               <p style={{ color: "var(--alarm)", fontSize: 13.5 }}>
-                That email isn&rsquo;t on the member list. Use the address from your purchase, or{" "}
-                <a href="/#pricing">get access here</a>.
+                {errMsg ? (
+                  <>Couldn&rsquo;t send the link — {errMsg}</>
+                ) : (
+                  <>
+                    That email isn&rsquo;t on the member list. Use the address from your purchase, or{" "}
+                    <a href="/#pricing">get access here</a>.
+                  </>
+                )}
               </p>
             )}
           </form>
