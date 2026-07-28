@@ -1,7 +1,7 @@
 # The November Window — course platform
 
 Membership site wrapping the interactive playbook (`content/playbook.html`).
-**Stack:** Next.js (App Router) · Vercel · Supabase (auth + DB) · Stripe ($47/mo sub) · Resend (onboarding email) · Mux (video + watch tracking).
+**Stack:** Next.js (App Router) · Vercel · Supabase (auth + DB) · Stripe ($47 one-time payment) · Resend (onboarding email) · Mux (video + watch tracking).
 
 ## What's already built
 
@@ -45,11 +45,11 @@ git remote add origin <your-repo-url> && git push -u origin main
    ```
 
 ### 3. Stripe
-1. **Products → Add product**: "The November Window", recurring, **$47.00 USD / month**. Copy the `price_...` id → `STRIPE_PRICE_ID`.
+1. **Products → Add product**: "The November Window", one-time, **$47.00 USD**. Copy the `price_...` id → `STRIPE_PRICE_ID`.
 2. **Developers → API keys**: secret key → `STRIPE_SECRET_KEY`.
 3. **Developers → Webhooks → Add endpoint**: `https://yourdomain.com/api/stripe/webhook`, events:
-   `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`.
-   Copy the signing secret → `STRIPE_WEBHOOK_SECRET`.
+   `checkout.session.completed` (the `customer.subscription.*` events are only needed if legacy
+   recurring subs exist). Copy the signing secret → `STRIPE_WEBHOOK_SECRET`.
 4. Local testing: `stripe listen --forward-to localhost:3000/api/stripe/webhook` (use the secret it prints).
 
 ### 4. Resend
@@ -78,13 +78,13 @@ git remote add origin <your-repo-url> && git push -u origin main
 - [ ] Open the playbook, mark two sections complete, tick a checklist → refresh in a different browser after logging in → state persists.
 - [ ] `/admin` → invite a test email → onboarding email arrives, member has access.
 - [ ] `/admin` → Download PDF → shows both members with correct section counts.
-- [ ] Cancel the test sub in Stripe → member loses `/course` access; their row is archived, not deleted.
+- [ ] (One-time payment model: no cancellation flow — access is lifetime. Refunds are handled manually in Stripe; to revoke access, archive the member's `subscriptions` row.)
 
 ---
 
 ## TODO (good Claude Code tasks)
 - ~~Mux webhook signature verification + `video.asset.ready` → auto-fill `modules.mux_playback_id`.~~ ✅ done
-- Stripe Customer Portal link on the dashboard (self-serve cancel/update card).
+- ~~Stripe Customer Portal link on the dashboard (self-serve cancel/update card).~~ n/a — switched to one-time payment.
 - Admin members table UI (list, search, archive button) — API/data layer already supports it.
 - Rate-limit `/api/progress` (e.g. Vercel firewall or upstash) — low priority.
 - Legal pages: Terms, Privacy, refund policy — required before running paid traffic; ad platforms check for these.

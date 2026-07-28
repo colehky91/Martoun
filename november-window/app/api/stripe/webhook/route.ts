@@ -8,9 +8,10 @@ export const runtime = "nodejs"; // raw body needed for signature verification
 
 /**
  * checkout.session.completed  → find-or-create the Supabase user, record the
- *                               subscription, email a magic sign-in link (Resend).
- * customer.subscription.*     → keep the mirrored status current.
- *                               Cancellations ARCHIVE (archived_at) — never delete.
+ *                               one-time purchase (a permanently-active row in
+ *                               `subscriptions`), email a magic sign-in link (Resend).
+ * customer.subscription.*     → legacy handlers from the subscription era; kept so
+ *                               any old recurring subs still archive on cancel.
  */
 export async function POST(req: Request) {
   const body = await req.text();
@@ -51,12 +52,14 @@ export async function POST(req: Request) {
           await db.from("profiles").upsert({ id: userId, email }, { onConflict: "id" });
         }
 
-        // 2. Record the subscription
+        // 2. Record the purchase — one-time payment, so there's no Stripe
+        // subscription id; the payment intent is the unique per-purchase key,
+        // and the row stays status=active forever (lifetime access).
         await db.from("subscriptions").upsert(
           {
             user_id: userId,
             stripe_customer_id: String(session.customer ?? ""),
-            stripe_subscription_id: String(session.subscription ?? ""),
+            stripe_subscription_id: String(session.subscription ?? session.payment_intent ?? session.id),
             status: "active",
             updated_at: new Date().toISOString(),
           },

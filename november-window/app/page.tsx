@@ -93,7 +93,7 @@ export default function Landing() {
         </div>
 
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="/api/checkout" className="btn">Start now — $47/mo</a>
+          <a href="/api/checkout" className="btn">Get the playbook — $47</a>
           <a href="#inside" className="btn ghost">See what&rsquo;s inside</a>
         </div>
       </section>
@@ -130,8 +130,8 @@ export default function Landing() {
 
       {/* ── pricing ─────────────────────────────────── */}
       <section id="pricing" className="wrap" style={{ padding: "80px 28px 100px", textAlign: "center" }}>
-        <div className="eyebrow">One plan. Cancel whenever.</div>
-        <h2 style={{ fontSize: "clamp(1.9rem,4vw,2.6rem)", marginBottom: 30 }}>Membership</h2>
+        <div className="eyebrow">One payment. Yours for good.</div>
+        <h2 style={{ fontSize: "clamp(1.9rem,4vw,2.6rem)", marginBottom: 30 }}>Lifetime access</h2>
         <div
           style={{
             maxWidth: 420, margin: "0 auto", background: "var(--surface)",
@@ -139,7 +139,7 @@ export default function Landing() {
           }}
         >
           <div className="display" style={{ fontSize: "3.4rem", fontWeight: 900 }}>
-            $47<span style={{ fontSize: "1.2rem", color: "var(--sand-dim)" }}>/mo</span>
+            $47<span style={{ fontSize: "1.2rem", color: "var(--sand-dim)" }}> once</span>
           </div>
           <ul style={{ listStyle: "none", margin: "24px 0 30px", textAlign: "left", color: "var(--sand-dim)", fontSize: 15 }}>
             {[
