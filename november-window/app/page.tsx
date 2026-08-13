@@ -155,14 +155,16 @@ export default function Landing() {
           </ul>
           <a href="/api/checkout" className="btn" style={{ width: "100%" }}>Get access</a>
           <p className="mono" style={{ fontSize: 10.5, color: "var(--sand-dim)", marginTop: 16, letterSpacing: "0.08em" }}>
-            SECURE CHECKOUT VIA STRIPE · ACCESS EMAILED IN MINUTES
+            SECURE CHECKOUT VIA STRIPE · ACCESS EMAILED IN MINUTES ·{" "}
+            <a href="/refunds" style={{ color: "var(--sand-dim)" }}>ALL SALES FINAL</a>
           </p>
         </div>
       </section>
 
       <footer style={{ borderTop: "1px solid var(--line-soft)", padding: "26px 0", textAlign: "center" }}>
         <span className="mono" style={{ fontSize: 11, color: "var(--sand-dim)" }}>
-          © {new Date().getFullYear()} The November Window · <a href="/login">Member login</a>
+          © {new Date().getFullYear()} The November Window · <a href="/login">Member login</a> ·{" "}
+          <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/refunds">Refunds</a>
         </span>
       </footer>
     </main>

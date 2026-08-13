@@ -12,6 +12,13 @@ export async function GET(req: Request) {
       mode: "payment",
       customer_creation: "always", // so the webhook can record a customer id
       line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
+      // no-refund policy disclosed at the point of payment — chargeback defense
+      custom_text: {
+        submit: {
+          message:
+            "Instant digital access — all sales are final and non-refundable. Policy: thenovemberwindow.com/refunds",
+        },
+      },
       success_url: `${site}/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${site}/#pricing`,
       allow_promotion_codes: true,

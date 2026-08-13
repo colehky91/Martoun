@@ -87,7 +87,7 @@ git remote add origin <your-repo-url> && git push -u origin main
 - ~~Stripe Customer Portal link on the dashboard (self-serve cancel/update card).~~ n/a — switched to one-time payment.
 - Admin members table UI (list, search, archive button) — API/data layer already supports it.
 - Rate-limit `/api/progress` (e.g. Vercel firewall or upstash) — low priority.
-- Legal pages: Terms, Privacy, refund policy — required before running paid traffic; ad platforms check for these.
+- ~~Legal pages: Terms, Privacy, refund policy — required before running paid traffic; ad platforms check for these.~~ ✅ done — `/terms`, `/privacy`, `/refunds` (all sales final, no refunds; disclosed on the pricing card and at Stripe checkout), linked in the footer.
 - Switch Mux to signed playback URLs if piracy becomes a problem.
 
 ## Prompt for Claude Code
