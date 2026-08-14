@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chip In — chipin.co/maya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEBE3;
+    --card:#FDFCF8;
+    --ink:#17170F;
+    --soft:#75736A;
+    --rule:#D6D3C7;
+    --mustard:#E8B33C;
+    --forest:#16332B;
+    --stamp:#D8321F;
+    --go:#2F8F5B;
+    --display:'Archivo Black','Arial Black',Impact,sans-serif;
+    --mono:'Courier Prime','Courier New',monospace;
+    --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;
+    padding:0 0 40px;
+  }
+  .shell{max-width:430px;margin:0 auto;padding:0 14px}
+
+  /* ---------- top bar ---------- */
+  .bar{background:var(--forest);color:var(--paper);padding:11px 0;margin-bottom:20px}
+  .bar .shell{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--display);font-size:16px;letter-spacing:-.01em}
+  .brand em{font-style:normal;color:var(--mustard)}
+  .url{font-family:var(--mono);font-size:11px;color:#9CB3A9;letter-spacing:.04em}
+
+  .switch{display:flex;gap:5px;margin-bottom:18px}
+  .switch button{
+    flex:1;font-family:var(--mono);font-size:10.5px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.08em;padding:9px 4px;
+    background:transparent;border:1.5px solid var(--rule);color:var(--soft);
+    border-radius:2px;cursor:pointer;
+  }
+  .switch button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .switch button:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+
+  /* ---------- the receipt (signature element) ---------- */
+  .receipt{
+    background:var(--card);position:relative;padding:0 0 6px;
+    filter:drop-shadow(0 2px 5px rgba(23,23,15,.10));
+    /* torn edges top and bottom */
+    -webkit-mask:
+      radial-gradient(circle at 6px 0, transparent 5px, #000 5.5px) 0 0/12px 12px repeat-x,
+      radial-gradient(circle at 6px 12px, transparent 5px, #000 5.5px) 0 100%/12px 12px repeat-x,
+      linear-gradient(#000,#000) 0 12px/100% calc(100% - 24px) no-repeat;
+    mask:
+      radial-gradient(circle at 6px 0, transparent 5px, #000 5.5px) 0 0/12px 12px repeat-x,
+      radial-gradient(circle at 6px 12px, transparent 5px, #000 5.5px) 0 100%/12px 12px repeat-x,
+      linear-gradient(#000,#000) 0 12px/100% calc(100% - 24px) no-repeat;
+  }
+  .inner{padding:20px 20px 24px}
+
+  .who{display:flex;align-items:center;gap:9px;margin-bottom:3px}
+  .who b{font-size:15px;font-weight:600}
+  .badge{
+    font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.09em;
+    padding:3px 6px;border-radius:2px;background:var(--go);color:#fff;
+  }
+  .badge.no{background:transparent;color:var(--stamp);border:1px solid var(--stamp)}
+  .handle{font-family:var(--mono);font-size:11.5px;color:var(--soft);margin-bottom:16px}
+
+  .ask{
+    font-family:var(--display);font-size:26px;line-height:1.12;
+    letter-spacing:-.015em;margin-bottom:18px;
+  }
+
+  .lines{
+    border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);
+    padding:12px 0;font-family:var(--mono);font-size:13px;margin-bottom:14px;
+  }
+  .lines div{display:flex;justify-content:space-between;gap:10px}
+  .lines div + div{margin-top:5px}
+  .lines .l{color:var(--soft)}
+  .lines .v{font-weight:700}
+  .lines .big{font-size:16px;padding-top:7px;margin-top:7px;border-top:1px solid var(--rule)}
+
+  .bar-wrap{margin-bottom:6px}
+  .track{height:9px;background:var(--rule);border-radius:1px;overflow:hidden}
+  .track span{display:block;height:100%;background:var(--mustard);transition:width .45s ease}
+  .track.full span{background:var(--go)}
+  .pct{font-family:var(--mono);font-size:11px;color:var(--soft);margin-top:6px;letter-spacing:.05em}
+
+  .cta{
+    width:100%;padding:16px;margin-top:18px;
+    font-family:var(--display);font-size:17px;letter-spacing:-.01em;
+    background:var(--ink);color:var(--card);border:none;border-radius:3px;cursor:pointer;
+  }
+  .cta:disabled{background:var(--go);cursor:default}
+  .cta:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+
+  .stamp{
+    position:absolute;top:22px;right:16px;z-index:2;
+    font-family:var(--display);font-size:15px;letter-spacing:.04em;
+    color:var(--stamp);border:3px solid var(--stamp);padding:5px 9px;
+    transform:rotate(-11deg);opacity:.9;
+    animation:thud .3s cubic-bezier(.2,1.4,.5,1) both;
+  }
+  @keyframes thud{from{transform:rotate(-11deg) scale(2.4);opacity:0}to{transform:rotate(-11deg) scale(1);opacity:.9}}
+
+  /* ---------- proof block ---------- */
+  .proof{
+    border-top:1px dashed var(--rule);margin-top:20px;padding-top:16px;
+  }
+  .proof h3{
+    font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--soft);margin-bottom:10px;
+  }
+  .locked{
+    border:1.5px dashed var(--rule);padding:22px 14px;text-align:center;
+    font-family:var(--mono);font-size:12px;color:var(--soft);line-height:1.5;
+  }
+  .proof img{width:100%;border-radius:2px;display:block;margin-bottom:8px}
+  .proof .cap{font-family:var(--mono);font-size:11px;color:var(--soft)}
+  .upload{
+    border:1.5px dashed var(--go);padding:20px 14px;text-align:center;cursor:pointer;
+    font-family:var(--mono);font-size:12px;color:var(--go);font-weight:700;line-height:1.5;
+  }
+
+  /* ---------- givers ---------- */
+  .givers{margin-top:16px;padding:0 6px}
+  .givers h3{
+    font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--soft);margin-bottom:8px;
+  }
+  .g{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule)}
+  .g .rank{font-family:var(--display);font-size:14px;width:22px;color:var(--soft)}
+  .g:first-of-type .rank{color:var(--mustard)}
+  .g .nm{flex:1;font-size:14px;font-weight:500}
+  .g .amt{font-family:var(--mono);font-weight:700;font-size:13px}
+
+  /* ---------- setup page ---------- */
+  .page{display:none}
+  .page.on{display:block}
+  .panel{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:18px 16px;margin-bottom:14px}
+  .panel h2{font-family:var(--display);font-size:19px;margin-bottom:4px}
+  .panel .sub{font-size:13px;color:var(--soft);margin-bottom:6px}
+
+  label{
+    display:block;font-family:var(--mono);font-size:10px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.09em;color:var(--soft);margin:15px 0 5px;
+  }
+  input,select{
+    width:100%;padding:11px 12px;font-family:var(--body);font-size:15px;
+    border:1.5px solid var(--rule);border-radius:2px;background:#fff;color:var(--ink);
+  }
+  input:focus,select:focus{outline:none;border-color:var(--ink)}
+  .two{display:flex;gap:9px}.two>*{flex:1}
+  .pre{
+    display:flex;align-items:center;border:1.5px solid var(--rule);border-radius:2px;background:#fff;
+  }
+  .pre span{font-family:var(--mono);font-size:13px;color:var(--soft);padding-left:11px}
+  .pre input{border:none;padding-left:2px}
+
+  .code{
+    font-family:var(--display);font-size:24px;letter-spacing:.14em;
+    background:var(--forest);color:var(--mustard);padding:14px;text-align:center;
+    border-radius:3px;margin-top:10px;
+  }
+  .btn{
+    width:100%;padding:13px;margin-top:16px;font-family:var(--mono);font-size:12.5px;
+    font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+    background:var(--mustard);color:var(--ink);border:none;border-radius:2px;cursor:pointer;
+  }
+  .btn.dark{background:var(--ink);color:var(--card)}
+  .warn{
+    font-size:12px;color:#7C4A10;background:#F8EBCF;border-left:3px solid var(--mustard);
+    padding:9px 11px;margin-top:9px;line-height:1.45;
+  }
+  .err{font-size:12px;color:var(--stamp);margin-top:9px;font-weight:500;min-height:1px}
+
+  /* ---------- donate sheet ---------- */
+  .veil{position:fixed;inset:0;z-index:40;background:rgba(22,51,43,.6);display:flex;align-items:flex-end;justify-content:center}
+  .veil[hidden]{display:none}
+  .sheet{
+    background:var(--card);width:100%;max-width:430px;padding:22px 18px 26px;
+    border-radius:8px 8px 0 0;animation:up .22s ease both;max-height:92vh;overflow-y:auto;
+  }
+  @keyframes up{from{transform:translateY(28px)}to{transform:none}}
+  .sheet h3{font-family:var(--display);font-size:19px;margin-bottom:14px}
+  .amts{display:flex;gap:8px;margin-bottom:6px}
+  .amts button{
+    flex:1;padding:14px 0;font-family:var(--display);font-size:17px;
+    background:#fff;border:1.5px solid var(--rule);border-radius:2px;color:var(--ink);cursor:pointer;
+  }
+  .amts button.on{background:var(--mustard);border-color:var(--mustard)}
+
+  .tip{margin-top:18px}
+  .tip .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+  .tip .lab{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+  .tip .val{font-family:var(--mono);font-size:13px;font-weight:700}
+  input[type=range]{width:100%;accent-color:var(--mustard);padding:0}
+  .tipnote{font-size:11.5px;color:var(--soft);margin-top:7px;line-height:1.45}
+
+  .split{
+    font-family:var(--mono);font-size:13px;margin-top:18px;
+    border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);padding:12px 0;
+  }
+  .split div{display:flex;justify-content:space-between}
+  .split div+div{margin-top:5px}
+  .split .l{color:var(--soft)}
+  .split .tot{font-weight:700;border-top:1px solid var(--rule);padding-top:7px;margin-top:7px}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="shell">
+  <div class="brand">CHIP<em>IN</em></div>
+  <div class="url" id="liveurl">chipin.co/maya</div>
+</div></div>
+
+<div class="shell">
+  <div class="switch">
+    <button aria-selected="true" data-go="ask">The page</button>
+    <button aria-selected="false" data-go="setup">Make yours</button>
+    <button aria-selected="false" data-go="top">Top givers</button>
+  </div>
+
+  <!-- ============ PUBLIC ASK PAGE ============ -->
+  <section class="page on" id="ask">
+    <div class="receipt">
+      <div id="stampslot"></div>
+      <div class="inner">
+        <div class="who">
+          <b id="c-name">Maya</b>
+          <span class="badge" id="c-badge">HANDLE VERIFIED</span>
+        </div>
+        <div class="handle" id="c-handle">paypal.me/mayacooks</div>
+
+        <div class="ask" id="c-ask">Steak and sweet potato for my roommate's birthday</div>
+
+        <div class="bar-wrap">
+          <div class="track" id="track"><span style="width:0%"></span></div>
+          <div class="pct" id="pct">0% — $0 of $30</div>
+        </div>
+
+        <div class="lines">
+          <div><span class="l">Goal</span><span class="v" id="l-goal">$30.00</span></div>
+          <div><span class="l">Raised</span><span class="v" id="l-got">$0.00</span></div>
+          <div><span class="l">Givers</span><span class="v" id="l-n">0</span></div>
+          <div class="big"><span class="l">Still short</span><span class="v" id="l-left">$30.00</span></div>
+        </div>
+
+        <button class="cta" id="cta">Chip in</button>
+
+        <div class="proof" id="proof"></div>
+      </div>
+    </div>
+
+    <div class="givers">
+      <h3>Who chipped in</h3>
+      <div id="glist"></div>
+    </div>
+  </section>
+
+  <!-- ============ SETUP ============ -->
+  <section class="page" id="setup">
+    <div class="panel">
+      <h2>Claim your page</h2>
+      <p class="sub">One link. Goes in your TikTok bio.</p>
+
+      <label for="s-name">Your name</label>
+      <input id="s-name" maxlength="24" placeholder="Maya">
+
+      <label for="s-slug">Your link</label>
+      <div class="pre"><span>chipin.co/</span><input id="s-slug" maxlength="20" placeholder="mayacooks"></div>
+
+      <div class="two">
+        <div>
+          <label for="s-rail">Pay me with</label>
+          <select id="s-rail">
+            <option value="paypal">PayPal</option>
+            <option value="cashapp">Cash App</option>
+            <option value="venmo">Venmo</option>
+            <option value="interac">Interac</option>
+          </select>
+        </div>
+        <div>
+          <label for="s-handle">Handle</label>
+          <input id="s-handle" placeholder="mayacooks">
+        </div>
+      </div>
+      <div id="railwarn"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Prove it's yours</h2>
+      <p class="sub">Paste this code into your payment app's profile bio. We check it before your page goes live. This is the part that makes strangers trust you.</p>
+      <div class="code" id="vcode">7KQ2XR</div>
+      <button class="btn" id="verify">I added the code</button>
+      <div class="err" id="verr"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Write the ask</h2>
+      <p class="sub">Be specific. "Steak for my roommate's birthday" beats "food money."</p>
+
+      <label for="s-ask">What you're buying</label>
+      <input id="s-ask" maxlength="90" placeholder="Steak and sweet potato for my roommate's birthday">
+
+      <label for="s-goal">How much (max $50)</label>
+      <input id="s-goal" type="number" min="1" max="50" placeholder="30">
+
+      <div class="err" id="serr"></div>
+      <button class="btn dark" id="publish">Publish my page</button>
+    </div>
+  </section>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <section class="page" id="top">
+    <div class="panel">
+      <h2>Top givers</h2>
+      <p class="sub">Everyone who's chipped in, ranked. This is the part GoFundMe will never build.</p>
+    </div>
+    <div id="toplist"></div>
+  </section>
+</div>
+
+<!-- ============ DONATE SHEET ============ -->
+<div class="veil" id="veil" hidden>
+  <div class="sheet">
+    <h3 id="sh-title">Chip in to Maya</h3>
+
+    <div class="amts" id="amts">
+      <button data-a="1" class="on">$1</button>
+      <button data-a="3">$3</button>
+      <button data-a="5">$5</button>
+      <button data-a="10">$10</button>
+    </div>
+
+    <div class="tip">
+      <div class="row">
+        <span class="lab">Tip to keep Chip In running</span>
+        <span class="val" id="tipval">5%</span>
+      </div>
+      <input type="range" id="tiprange" min="0" max="20" value="5" step="1">
+      <div class="tipnote">Optional. Slide to zero if you'd rather not — it changes nothing for Maya.</div>
+    </div>
+
+    <div class="split">
+      <div><span class="l">Maya gets</span><span id="sp-them">$1.00</span></div>
+      <div><span class="l">Tip to Chip In</span><span id="sp-tip">$0.05</span></div>
+      <div class="tot"><span>You pay</span><span id="sp-tot">$1.05</span></div>
+    </div>
+
+    <button class="btn dark" id="sh-go">Continue to PayPal</button>
+    <button class="btn" id="sh-x" style="background:transparent;border:1.5px solid var(--rule)">Never mind</button>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   STATE — in memory. See BUILD-STEPS.md to make it persist.
+   ========================================================== */
+const ME = "You";
+
+let page = {
+  name:"Maya", slug:"maya", rail:"paypal", handle:"mayacooks", verified:true,
+  ask:"Steak and sweet potato for my roommate's birthday",
+  goal:30, got:0, proof:null,
+};
+
+let givers = [];                       // for this page
+let board  = [                         // global leaderboard
+  {name:"bigspender_88", total:412},{name:"Tasha", total:260},
+  {name:"quietwallet", total:187},{name:"Marc-Andre", total:96},
+];
+
+let amt = 1, tipPct = 5;
+
+const RAILS = {
+  paypal :{label:"PayPal",   pretty:h=>`paypal.me/${h}`,  link:(h,a)=>`https://paypal.me/${encodeURIComponent(h)}/${a}`},
+  cashapp:{label:"Cash App", pretty:h=>`cash.app/$${h.replace(/^\$/,'')}`, link:(h,a)=>`https://cash.app/$${encodeURIComponent(h.replace(/^\$/,''))}/${a}`},
+  venmo  :{label:"Venmo",    pretty:h=>`venmo.com/${h.replace(/^@/,'')}`,  link:(h,a)=>`https://venmo.com/${encodeURIComponent(h.replace(/^@/,''))}?txn=pay&amount=${a}&note=Chip%20In`},
+  interac:{label:"Interac",  pretty:h=>h, link:null},
+};
+const WARN = {
+  cashapp:"Cash App only works in the US and UK. Everyone else sees a dead link.",
+  venmo:"Venmo is US-only. Also: Venmo shows your real name and friend list to anyone who looks you up.",
+  interac:"Interac has no tap-to-pay link — givers must copy your email and send it manually. Expect most to drop off.",
+};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money = n => '$' + n.toFixed(2);
+
+/* ---------- render the public page ---------- */
+function draw(){
+  const done = page.got >= page.goal;
+  const pct  = Math.min(100, Math.round(page.got / page.goal * 100));
+
+  $("liveurl").textContent = "chipin.co/" + page.slug;
+  $("c-name").textContent  = page.name;
+  $("c-ask").textContent   = page.ask;
+  $("c-handle").textContent = RAILS[page.rail].pretty(page.handle);
+
+  const b = $("c-badge");
+  b.textContent = page.verified ? "HANDLE VERIFIED" : "UNVERIFIED";
+  b.className = "badge" + (page.verified ? "" : " no");
+
+  $("track").className = "track" + (done ? " full" : "");
+  $("track").firstElementChild.style.width = pct + "%";
+  $("pct").textContent = `${pct}% — ${money(page.got)} of ${money(page.goal)}`;
+
+  $("l-goal").textContent = money(page.goal);
+  $("l-got").textContent  = money(page.got);
+  $("l-n").textContent    = givers.length;
+  $("l-left").textContent = money(Math.max(0, page.goal - page.got));
+
+  $("cta").textContent = done ? "Fully funded" : "Chip in";
+  $("cta").disabled = done;
+  $("stampslot").innerHTML = done ? `<div class="stamp">FUNDED</div>` : "";
+
+  drawProof(done);
+  drawGivers();
+}
+
+function drawProof(done){
+  const p = $("proof");
+  if(!done){
+    p.innerHTML = `<h3>Proof of purchase</h3>
+      <div class="locked">Unlocks when the goal is hit.<br>
+      Maya posts what she actually bought — or this page shows she never did.</div>`;
+  } else if(page.proof){
+    p.innerHTML = `<h3>Proof of purchase</h3>
+      <img src="${page.proof}" alt="What Maya bought">
+      <div class="cap">Posted by ${esc(page.name)} after funding.</div>`;
+  } else {
+    p.innerHTML = `<h3>Proof of purchase</h3>
+      <div class="upload" id="up">Funded — now post the receipt.<br>Tap to add a photo of what you bought.</div>
+      <input type="file" id="pf" accept="image/*" hidden>`;
+    $("up").addEventListener("click", ()=> $("pf").click());
+    $("pf").addEventListener("change", e=>{
+      const f = e.target.files[0]; if(!f) return;
+      page.proof = URL.createObjectURL(f); draw();
+    });
+  }
+}
+
+function drawGivers(){
+  $("glist").innerHTML = givers.length
+    ? givers.map((g,i)=>`<div class="g"><div class="rank">${i+1}</div>
+        <div class="nm">${esc(g.name)}</div><div class="amt">${money(g.amt)}</div></div>`).join("")
+    : `<div class="g" style="color:var(--soft)"><div class="nm">Nobody yet. Be first.</div></div>`;
+}
+
+function drawBoard(){
+  $("toplist").innerHTML = [...board].sort((a,b)=>b.total-a.total)
+    .map((g,i)=>`<div class="g"><div class="rank">${i+1}</div>
+      <div class="nm">${esc(g.name)}</div><div class="amt">$${g.total}</div></div>`).join("");
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll(".switch button").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".switch button").forEach(b=>b.setAttribute("aria-selected","false"));
+    btn.setAttribute("aria-selected","true");
+    ["ask","setup","top"].forEach(id => $(id).classList.toggle("on", id === btn.dataset.go));
+    if(btn.dataset.go === "top") drawBoard();
+    window.scrollTo(0,0);
+  });
+});
+
+/* ---------- donate flow ---------- */
+$("cta").addEventListener("click", ()=>{
+  $("sh-title").textContent = `Chip in to ${page.name}`;
+  $("sh-go").textContent = `Continue to ${RAILS[page.rail].label}`;
+  $("veil").hidden = false;
+  splits();
+});
+
+$("amts").addEventListener("click", e=>{
+  const b = e.target.closest("[data-a]"); if(!b) return;
+  amt = Number(b.dataset.a);
+  [...$("amts").children].forEach(x=>x.classList.toggle("on", x===b));
+  splits();
+});
+
+$("tiprange").addEventListener("input", e=>{ tipPct = Number(e.target.value); splits(); });
+
+function splits(){
+  const tip = amt * tipPct / 100;
+  $("tipval").textContent = tipPct + "%";
+  $("sp-them").textContent = money(amt);
+  $("sp-tip").textContent  = money(tip);
+  $("sp-tot").textContent  = money(amt + tip);
+  document.querySelector(".split .l").textContent = page.name + " gets";
+}
+
+$("sh-go").addEventListener("click", ()=>{
+  const r = RAILS[page.rail];
+  if(r.link) window.open(r.link(page.handle, amt), "_blank", "noopener");
+  else navigator.clipboard?.writeText(page.handle);
+
+  page.got += amt;
+  const mine = givers.find(g=>g.name===ME);
+  mine ? mine.amt += amt : givers.push({name:ME, amt});
+  givers.sort((a,b)=>b.amt-a.amt);
+  const onboard = board.find(g=>g.name===ME);
+  onboard ? onboard.total += amt : board.push({name:ME, total:amt});
+
+  $("veil").hidden = true;
+  draw();
+});
+$("sh-x").addEventListener("click", ()=> $("veil").hidden = true);
+
+/* ---------- setup ---------- */
+$("s-rail").addEventListener("change", e=>{
+  $("railwarn").innerHTML = WARN[e.target.value] ? `<div class="warn">${WARN[e.target.value]}</div>` : "";
+});
+
+let claimedVerified = false;
+$("verify").addEventListener("click", ()=>{
+  const h = $("s-handle").value.trim();
+  if(!h){ $("verr").textContent = "Add your payment handle above first."; return; }
+  claimedVerified = true;
+  $("verr").textContent = "";
+  $("verify").textContent = "Code found — verified";
+  $("verify").style.background = "var(--go)";
+  $("verify").style.color = "#fff";
+});
+
+$("publish").addEventListener("click", ()=>{
+  const name = $("s-name").value.trim(), slug = $("s-slug").value.trim().toLowerCase();
+  const rail = $("s-rail").value, handle = $("s-handle").value.trim();
+  const ask = $("s-ask").value.trim(), goal = parseInt($("s-goal").value,10);
+  const err = $("serr");
+
+  if(!name || !slug)        return err.textContent = "Name and link are both required.";
+  if(!/^[a-z0-9_.-]+$/.test(slug)) return err.textContent = "Links can only use letters, numbers, dots, dashes and underscores.";
+  if(!handle)               return err.textContent = "Add the handle where the money should land.";
+  if(!ask)                  return err.textContent = "Say what you're buying.";
+  if(!goal || goal < 1 || goal > 50) return err.textContent = "Goal has to be between $1 and $50.";
+  err.textContent = "";
+
+  page = {name, slug, rail, handle, verified:claimedVerified, ask, goal, got:0, proof:null};
+  givers = [];
+  document.querySelector('[data-go="ask"]').click();
+  draw();
+});
+
+/* random verify code, like the real thing would issue */
+$("vcode").textContent = Array.from({length:6},()=>
+  "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[Math.floor(Math.random()*32)]).join("");
+
+draw();
+</script>
+</body>
+</html>

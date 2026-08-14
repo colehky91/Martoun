@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Design tokens — see CLAUDE.md. Exposed to Tailwind as theme colors/fonts,
+   so `bg-paper`, `text-soft`, `font-mono` etc. all work. */
+@theme {
+  --color-paper: #edebe3;
+  --color-card: #fdfcf8;
+  --color-ink: #17170f;
+  --color-soft: #75736a;
+  --color-rule: #d6d3c7;
+  --color-mustard: #e8b33c;
+  --color-forest: #16332b;
+  --color-stamp: #d8321f;
+  --color-go: #2f8f5b;
+
+  --font-display: var(--font-archivo-black), "Arial Black", Impact, sans-serif;
+  --font-mono: var(--font-courier-prime), "Courier New", monospace;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  /* Perforated top and bottom edges. Signature element — keep it. */
+  .receipt {
+    background: var(--color-card);
+    filter: drop-shadow(0 2px 5px rgba(23, 23, 15, 0.1));
+    -webkit-mask:
+      radial-gradient(circle at 6px 0, transparent 5px, #000 5.5px) 0 0 / 12px
+        12px repeat-x,
+      radial-gradient(circle at 6px 12px, transparent 5px, #000 5.5px) 0 100% /
+        12px 12px repeat-x,
+      linear-gradient(#000, #000) 0 12px / 100% calc(100% - 24px) no-repeat;
+    mask:
+      radial-gradient(circle at 6px 0, transparent 5px, #000 5.5px) 0 0 / 12px
+        12px repeat-x,
+      radial-gradient(circle at 6px 12px, transparent 5px, #000 5.5px) 0 100% /
+        12px 12px repeat-x,
+      linear-gradient(#000, #000) 0 12px / 100% calc(100% - 24px) no-repeat;
+  }
+
+  /* The rotated red FUNDED stamp, thudding into place. */
+  .stamp {
+    transform: rotate(-11deg);
+    opacity: 0.9;
+    animation: thud 0.3s cubic-bezier(0.2, 1.4, 0.5, 1) both;
+  }
+}
+
+@keyframes thud {
+  from {
+    transform: rotate(-11deg) scale(2.4);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(-11deg) scale(1);
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
