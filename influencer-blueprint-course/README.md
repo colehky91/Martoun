@@ -40,9 +40,16 @@ audience into income.
 | `09-templates-and-scripts.md` | Swipe file — every script and template, in one place |
 | `10-30-day-action-plan.md` | The student's day-by-day launch plan |
 | `11-coaching-program-playbook.md` | **Internal** — how you deliver the $10k coaching tier |
+| `12-nick-case-study.md` | **The flagship proof** — Nick's 100M-view organic story, built once, used everywhere |
+| `13-organic-growth-system.md` | The core IP — your organic TikTok method, extracted section by section |
+| `14-views-to-fans-pipeline.md` | How views became followers, streams, and a real fanbase |
+| `15-brain-dump-worksheet.md` | **Start here** — Q&A you and Nick answer raw; Claude turns it into lessons |
 
 ## Production checklist (do these in order)
 
+- [ ] **First:** you and Nick answer `15-brain-dump-worksheet.md` (voice memos are fine)
+- [ ] Gather the receipts folder per `12-nick-case-study.md` Part 1 (screenshots, analytics)
+- [ ] Fill files 12–14 from the brain-dump answers (or hand the answers to Claude to draft)
 - [ ] Fill in every ✏️ block in modules 1–8 (start with Module 1 — it sets the tone)
 - [ ] Record videos: one per lesson, 5–15 min each, talking-head + screen share
 - [ ] Turn each module's Action Steps into a fillable PDF or Notion workbook
