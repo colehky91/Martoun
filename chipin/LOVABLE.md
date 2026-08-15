@@ -92,6 +92,14 @@ Fonts:
 Signature elements, never remove: perforated top and bottom edges on receipt
 cards, dashed rules between line-item blocks, the rotated red FUNDED stamp,
 and every number set in Courier Prime.
+
+The logo is supplied as SVG source and pasted into the chat. Use it exactly as
+given, at whatever size fits. Never redraw it, never recolour it, never swap it
+for an icon or an emoji, and never re-typeset the wordmark in another font —
+the letterforms in that file are outlines, not text, on purpose. The logo is a
+tilted receipt slip with torn edges and a part-filled progress bar across it;
+if what's on screen isn't that, something has replaced it and it needs putting
+back.
 ```
 
 ---
@@ -117,21 +125,24 @@ heart of the app, so it gets the real attention.
 Each ask card is a paper receipt:
 - Perforated top and bottom edges (CSS mask with repeating radial-gradients —
   do not fake this with a border)
-- Header row: display name in Inter semibold, then either a green "HANDLE
-  VERIFIED" pill or a red outlined "UNVERIFIED" pill, then the time posted in
-  Courier Prime, right-aligned and muted
+- Header row: display name in Inter semibold, then either a solid green "HANDLE
+  VERIFIED" pill (#2F8F5B, white text) or a red outlined "UNVERIFIED" pill
+  (#D8321F), then the time posted in Courier Prime, right-aligned and muted.
+  These two are the only green and red on the card — they mean something
 - Under that, their payment handle in Courier Prime, muted — e.g.
   "paypal.me/mayacooks"
 - The ask itself in Archivo Black, about 20px, tight leading. Keep it short —
   these are one-liners like "Large iced coffee before my 8am shift"
-- A thin progress bar: mustard fill on a rule-coloured track, 8px tall, square
-  corners. It turns green the moment the goal is hit
+- A thin progress bar: grape fill on a rule-coloured track, 8px tall, square
+  corners. It fills solid black the moment the goal is hit
 - One line under the bar in Courier Prime: "60% — $3.00 of $5.00"
 - A dashed-rule line-item block, all Courier Prime, label left and figure right:
   Goal / Raised / Givers / and a bolder "Still short" line separated by a solid
   rule above it
-- A full-width "Chip in" button in Archivo Black on ink-black. When the ask is
-  fully funded it becomes a disabled green button reading "Fully funded"
+- A full-width "Chip in" button in Archivo Black, white on black. When the ask
+  is fully funded it goes quiet instead of loud: disabled, rule-coloured
+  background, soft grey text, reading "Fully funded". The red stamp does the
+  celebrating — the button shouldn't compete with it
 - When funded, a red "FUNDED" stamp sits rotated about -11 degrees in the top
   right of the card, with a 3px red border, slightly transparent, and it
   animates in with a quick scale-down "thud" on first render
@@ -166,11 +177,11 @@ showing, one funded long ago with the NO RECEIPT POSTED mark, one at zero.
 2. THE LEADERBOARD ("/givers")
 A global ranking of people by total confirmed money given. Style it as one long
 receipt — a line-item list, not cards:
-- Rank number in Archivo Black, muted, except rank 1 which is mustard
+- Rank number in Archivo Black, muted, except rank 1 which is grape
 - Display name in Inter medium
 - Total given in Courier Prime bold, right-aligned
 - A thin solid rule between rows
-- The top 3 get slightly more vertical room and a subtle mustard left edge
+- The top 3 get slightly more vertical room and a subtle grape left edge
 At the top of the page, a short dry explainer panel: giving is ranked here, and
 giving is also what gets your own asks seen. Seed ~20 givers with believable
 handles and amounts.
@@ -183,12 +194,20 @@ feed. Seed two or three profiles so the links from the feed actually go
 somewhere.
 
 NAVIGATION
-A slim forest-green top bar, fixed, on every page: "CHIP" in paper white and
-"IN" in mustard, both Archivo Black. On the right, three Courier Prime uppercase
-links: FEED, GIVERS, and a placeholder profile link. That's the whole nav.
+A slim black top bar, fixed, on every page. I'm going to paste in the real logo
+as an SVG — drop it in the left of the bar at 28px tall and do not redraw it,
+recolour it, or replace it with an icon. Until I paste it, use "CHIP" in white
+and "IN" in light purple, both Archivo Black, as a placeholder. On the right,
+three Courier Prime uppercase links: FEED, GIVERS, and a placeholder profile
+link. That's the whole nav.
 
 CRAFT NOTES — these are what will make or break it
 - Every single number on screen is Courier Prime. No exceptions.
+- Purple is the only decorative colour in the app. Don't invent a secondary
+  palette, don't add a teal or an orange for variety, and don't tint the greys.
+  Everything that isn't black, white, grey or purple has to be earning its
+  place — which in this app means exactly three things: the green verified
+  pill, the red FUNDED stamp, and the red no-receipt mark.
 - Nothing has a large border radius. 2-3px maximum. This is paper, not glass.
 - No gradients, no glassmorphism, no drop shadows beyond a single soft one under
   each receipt card. No emoji anywhere in the UI.
@@ -249,8 +268,8 @@ in the form. Never trust the client with money.
 Generate a random 6-character code per profile at signup (uppercase letters and
 digits, no ambiguous characters like O/0 or I/1).
 
-Build a verification screen: show the code big, in Archivo Black on forest
-green with mustard text, and tell the user to paste it into their payment app's
+Build a verification screen: show the code big, in Archivo Black, light purple
+text on a black block, and tell the user to paste it into their payment app's
 profile bio. An "I've added it" button marks handle_verified true.
 
 For now, trust the click — but isolate it behind a single server-side function
@@ -381,7 +400,7 @@ GET SEEN 2.3× MORE". People need to feel the loop working or they won't play it
 - Skeleton loaders shaped like receipt cards
 - Full keyboard accessibility: the compose box, the Chip In sheet, and the tip
   slider all reachable and operable without a mouse. Visible focus rings in
-  mustard
+  grape, 3px, offset 2px
 - A landing page at "/" for signed-out visitors: what Chip In is in one line,
   the feed preview behind it, one signup call to action, no marketing fluff
 - Real page titles and meta descriptions
