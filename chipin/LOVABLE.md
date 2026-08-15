@@ -67,12 +67,22 @@ DESIGN
 Every ask is styled as a paper receipt. That's the concept, because we sell
 proof. Mobile first — nearly all traffic is on a phone.
 
-Colors:
-  paper   #EDEBE3     mustard #E8B33C
-  card    #FDFCF8     forest  #16332B
-  ink     #17170F     stamp   #D8321F
-  soft    #75736A     go      #2F8F5B
-  rule    #D6D3C7
+Colors — the brand is black and light purple. Two tints of one purple, because
+light purple on a white background is unreadable:
+  black   #0F0E12   near-black, the ink and the dark surfaces
+  lilac   #C3B1FF   the light purple accent, on black
+  grape   #6D4AF6   the same purple, deeper — the accent on light backgrounds
+  paper   #F7F5FC   page background
+  card    #FFFFFF   the receipt card itself
+  rule    #DCD6EC   dashed rules, progress bar tracks
+  soft    #6B6878   muted meta text
+
+Two functional colors survive outside the palette, because they carry meaning
+rather than style, and both are rare on screen:
+  go      #2F8F5B   the HANDLE VERIFIED pill only
+  stamp   #D8321F   the FUNDED stamp and the NO RECEIPT POSTED mark only
+
+Progress bars fill in grape on light cards. A funded bar fills solid black.
 
 Fonts:
   Archivo Black  — headlines, amounts, the FUNDED stamp
