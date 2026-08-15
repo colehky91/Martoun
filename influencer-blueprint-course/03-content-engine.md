@@ -23,9 +23,12 @@ Sales content underperforms on reach — that is fine and expected. It's not the
 viral; it's there to convert the audience the G and T posts built. Judge S posts on
 DMs, clicks, and sales. Never on views.
 
-> ✏️ **FILL IN:** Three real examples from your own account (or clients') — one G, one
-> T, one S post — with the actual results of each. Show the S post's low views next to
-> the money it made. That contrast is the whole lesson.
+**Worked examples (music, from the Nick playbook):**
+- **Growth:** a trend-sound flip with Nick's own twist — broad hook, made for strangers, zero ask.
+- **Trust:** the story behind a lyric, filmed close and raw — made for people who already follow.
+- **Sales:** "the full song drops Friday — pre-save in bio," posted the day after a
+  Growth post popped. A fraction of the viral post's views; the conversion (saves,
+  streams) was the point. Judge every post by ITS job, never by a universal scoreboard.
 
 **Action Step:** Re-label your last 30 posts G/T/S (you started this in the Module 1
 audit). Write your target weekly mix.
@@ -53,9 +56,13 @@ Six S-post formats to rotate — none of them feel like ads:
 "link in bio" at this audience size — it creates a DM conversation (Module 5 shows how
 to run it).
 
-> ✏️ **FILL IN:** One scripted example of each of the six formats, written for a
-> sample niche — hooks and all — so students can copy the skeleton. Use your real
-> posts wherever you have them.
+Copy-paste skeletons (swap in your niche):
+1. **Result/proof:** "This account was at [X] 90 days ago. Here's the exact posting system — [3 beats] — I put the whole thing in one place, comment SYSTEM."
+2. **Myth-buster:** "Everyone says post at 6pm. We got 100 million views ignoring that. What actually matters: [the real lever] — here's how — comment WORD for the guide."
+3. **Process peek:** film yourself building the thing ("day 4 of building the fan machine"). Curiosity does the selling; no CTA needed until the last frame.
+4. **FAQ:** "Biggest DM question this week: 'does this work under 10k followers?' Honest answer: [answer] — CTA."
+5. **Story sequence:** frame 1 the problem → 2 why it happens → 3 the shift → 4 proof → 5 CTA.
+6. **Direct ask:** "No tricks: it's called [name], it does [promise], it costs [price], link in bio. Regular videos resume tomorrow."
 
 **Action Step:** Write two S posts this week using formats 1 and 4. Post one.
 
@@ -75,11 +82,14 @@ The engine only works if it's sustainable. The one-session weekly system:
 3. **Batch record (60–90 min):** all week's videos in one sitting, same setup.
 4. **Schedule (15 min):** load the week into a scheduler. Done.
 
-> ✏️ **FILL IN:** Your actual tool stack (scheduler, editing app, idea-bank tool) with
-> a 2–3 minute screen demo of your real workflow. Name specific tools you actually use.
+**The stack that's actually enough:** CapCut (editing + auto-captions), your phone
+plus a $20 tripod, Notion or Apple Notes (idea bank), the native TikTok/IG scheduler
+or Later (scheduling), one shared folder for raw takes. Total: $0–30/month. An
+expensive setup before your first 100 posts is procrastination with a receipt.
 
-> ✏️ **FILL IN (optional but powerful):** A filmed "batch day" — sped-up footage of
-> you scripting and recording a week of content in one session.
+**[TO RECORD]** Film one real batch day — phone propped in the corner, footage sped
+up 20x, voiceover of what's happening. It's the most-rewatched video in courses like
+this because it makes the workload visible and believable.
 
 **Action Step:** Block one 3-hour session this week and produce 7 days of content.
 The 30-Day Plan assumes this happens weekly.

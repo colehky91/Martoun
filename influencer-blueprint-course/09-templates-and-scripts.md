@@ -2,9 +2,8 @@
 
 Every script from the course in one place. Students copy, personalize, send.
 
-> ✏️ **FILL IN (throughout):** wherever a script has `[BRACKETS]`, that's the
-> *student's* fill-in — leave those. Your job is the ✏️ blocks: swap in real examples
-> you've sent, and add niche-specific variants where marked.
+All templates below are **final** — `[BRACKETS]` are the *student's* fill-ins.
+Swap in real sent examples as they accumulate; until then these ship as-is.
 
 ---
 
@@ -28,8 +27,14 @@ Every script from the course in one place. Students copy, personalize, send.
 
 Rules: under 120 words, one specific idea, proof over adjectives, link the kit.
 
-> ✏️ **FILL IN:** Your best real sent pitch beside this template, plus one variant
-> for DM (shorter — 3 sentences max) and one for a brand that already follows you.
+**DM variant (3 sentences):** "Hey [Brand] — I'm [name], @[handle], [X]k [niche]
+followers at [X]% engagement. My audience already talks about [product category],
+and I've got a content idea that fits your current [campaign/season]. Media kit:
+[link] — open to your brief."
+
+**Warm variant (brand already follows/engages you):** "Saw you liked the [post] —
+that one did [stat]. If you're planning creator content this quarter I'd love to
+pitch you one idea. Kit: [link]."
 
 ## 2. Brand outreach — follow-ups
 
@@ -49,7 +54,9 @@ $[X]. If budget is fixed, we could do [smaller package] at $[Y] instead."
 and paid content separate — my content rates start at $[X] and the kit's here:
 [link]. If there's no budget this cycle, I'd love to be first in line when there is."
 
-> ✏️ **FILL IN:** The counters you've actually sent and what happened next.
+The two counters above are final — use verbatim. The pattern behind both: never a
+bare "no"; every counter re-anchors price to a named variable (usage, exclusivity,
+deliverable weight) so the brand negotiates scope, not your worth.
 
 ## 4. "Comment [WORD]" DM flow (from Module 5.3)
 
@@ -73,29 +80,32 @@ CTA.
 **Email 4 — Final hours (day 7 evening):** Short. What's ending (honestly), one
 sentence on who this is for, one on who it's NOT for → last CTA.
 
-> ✏️ **FILL IN:** Paste your actual launch emails under each skeleton as worked
-> examples.
+The four skeletons are the final structure. One rule per email: one story, one
+point, one CTA. Plain-spoken subject lines outperform clever ones ("it's open",
+"the honest FAQ", "last call — closing tonight").
 
 ## 6. Sales-call one-pager (Module 6.4 follow-up)
 
 One page: the promise / who it's for / what's included / timeline / price /
 2 testimonials / how to start. Sent after calls for the "ask my partner" case.
 
-> ✏️ **FILL IN:** Your real one-pager as a template (Canva/Docs link).
+Structure final as listed — build once in Canva/Docs, duplicate per offer.
 
 ## 7. Media kit skeleton (Module 4.2)
 
 Cover → Audience (screenshots) → Best content + results → Packages & rates →
 Contact.
 
-> ✏️ **FILL IN:** Canva template link + your finished kit as the example.
+Skeleton final (5 pages, per Module 4.2). Build in Canva from their media-kit
+starters; real analytics screenshots go on pages 2–3.
 
 ## 8. Brand-deal tracker
 
 Sheet columns: Brand / Contact / Email / Date pitched / FU1 / FU2 / Status
 (cold–replied–call–negotiating–signed–delivered–paid) / Value / Notes.
 
-> ✏️ **FILL IN:** Google Sheets template link, pre-filled with 3 example rows.
+Columns final as listed. Make the sheet once, add three example rows to show the
+flow, share view-only.
 
 ## 9. Disclosure lines (Module 8.1)
 

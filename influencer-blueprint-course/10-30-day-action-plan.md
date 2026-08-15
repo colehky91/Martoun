@@ -6,9 +6,9 @@ sent, a lead magnet capturing emails, and their first launch scheduled or done.
 
 Print it. Check the boxes.
 
-> ✏️ **FILL IN:** Adjust day counts to match your final lesson lineup, and record a
-> short "here's your next 30 days" walkthrough video to sit alongside this document.
-> If you run cohorts or the coaching tier, align these weeks to your call schedule.
+Day counts match the final module lineup (1–8). **[TO RECORD]** a 5-minute "here's
+your next 30 days" orientation video pointing at this plan. Coaching-tier alignment:
+weeks 1–4 of this plan = mentorship weeks 1–4.
 
 ---
 
@@ -63,6 +63,7 @@ Weekly, forever: one batch session, one weekly review, 5–10 new brand pitches 
 you want deal flow, every "comment [WORD]" reply worked through the DM flow. Quarterly:
 one scaling lever (Module 7.4).
 
-> ✏️ **FILL IN:** What YOUR week actually looks like now — a real screenshot of your
-> calendar. Ending the course by showing the sustainable rhythm (not hustle-porn)
-> sets honest expectations and reduces refunds.
+**The honest close:** the steady state is one batch session, one weekly review, and
+a handful of pitches per week — a working rhythm, not a grind. Show your own
+calendar on screen when you record this outro; "sustainable" is the sales pitch
+nobody else makes, and it's also what keeps refunds low.

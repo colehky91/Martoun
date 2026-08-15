@@ -14,11 +14,13 @@ have a *system* problem. At 25k–100k followers you already have more attention
 most small businesses will ever buy — you just haven't built the machine that turns
 attention into income. That's what we build here, module by module.
 
-> ✏️ **FILL IN:** Your origin story (60–90 seconds). Who you are, who your partner is,
-> what you've done in the creator economy, and the *specific* result that gives you the
-> right to teach this. Real numbers, real screenshots. If your proof is client results
-> rather than your own account, say that plainly — "we've done this for X creators" is
-> credible; vagueness is not.
+**The story (read as your on-camera script):** "A while back we made a bet with an
+artist named Nick: that we could build his music career with nothing but organic
+TikTok content. No label budget, no paid ads — not one dollar of spend. The result:
+over 100 million views on TikTok, close to 40,000 followers, more than 60 million
+streams on Spotify, and a fanbase with the kind of engagement big accounts would
+kill for. Every single view was earned. This course is that system, taught from
+zero." *(Add one human sentence each on who you two are and how you met Nick.)*
 
 How to use this course:
 1. Go in order. Module 2 depends on Module 1, and so on.
@@ -48,10 +50,12 @@ size:
   better per follower than entertainment/meme accounts. Smaller can literally be worth
   more.
 
-> ✏️ **FILL IN:** A real case study at this audience size — you, a client, or a
-> documented public example. Show the follower count, the offer, and the revenue.
-> One concrete example beats ten hypotheticals. Do NOT invent numbers, and do not
-> present your best result as typical.
+**The worked example — Nick:** an unknown artist taken to 100M+ TikTok views, ~40k
+followers, and 60M+ Spotify streams on organic content alone, with $0 in ads. Notice
+the shape: the follower count looks "small" next to the views, and the *streams* are
+where the value landed. That's this lesson's whole point — attention converts where
+trust lives, not where the vanity metric lives. (Full breakdown in the case-study
+module; put the analytics screenshots on screen while you tell it.)
 
 The lesson: your audience is an asset. This course is about installing the machine
 that monetizes it — and the machine has three parts: **Positioning** (Module 1),
@@ -80,11 +84,20 @@ Rules:
 Weak: "I help people get fit."
 Strong: "I help new moms rebuild core strength in 15 minutes a day without a gym."
 
-> ✏️ **FILL IN:** 3–5 examples of strong positioning statements *from your niche(s)* —
-> ideally real creators the student will recognize. Break down why each one works.
+Examples that work, by niche:
+- **Music:** "I make the first 3 seconds of a song impossible to scroll past — that's how strangers become fans."
+- **Fitness:** "I help busy dads lose the gut with 20-minute home workouts — no gym, no meal-prep religion."
+- **Finance:** "I help nurses become first-time investors with one paycheck-day move a month."
+- **Food:** "Restaurant-level pasta, 15 minutes, one pan — for people who hate dishes."
 
-> ✏️ **FILL IN:** Your own positioning statement as the worked example. Show the bad
-> first draft and how you sharpened it — the before/after teaches more than the result.
+Why each works: narrow WHO, concrete OUTCOME, visible MECHANISM. Read them aloud —
+they sound like a person, not a brand deck.
+
+**Our worked example:** first draft — "We help creators grow online." (Whose
+creators? Grow what? Says nothing.) Sharpened — "We help artists and creators turn
+organic short-form content into fans that pay — the exact system that took Nick from
+zero to 60M streams without ads." Same voice; now it names the who, the outcome, and
+the receipts.
 
 **Action Step (worksheet):**
 1. Write 5 versions of your positioning statement.
@@ -111,9 +124,9 @@ Before we build, we take inventory. The student audits four things:
    platforms, past brand contacts, testimonials, skills. Monetization goes faster when
    you start from what exists.
 
-> ✏️ **FILL IN:** A screen-recorded walkthrough of YOU auditing a real profile (yours,
-> a client's with permission, or a volunteer's). This is the highest-value video in
-> Module 1 — students copy what they watch.
+**[TO RECORD]** Screen-record a 10-minute audit of Nick's profile: read the bio out
+loud, scroll the last 30 posts labeling G/T/S on screen, open the analytics tabs,
+list the assets. One take; imperfect is fine — students copy what they watch.
 
 **Action Step (worksheet):** Complete the four-part audit. Deliverable: one page —
 positioning statement, content mix count (G/T/S), audience snapshot, asset list.

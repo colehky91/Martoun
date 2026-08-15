@@ -25,9 +25,11 @@ Keep it boring and cheap. One tool per job:
 Total: a real creator business runs on well under $150/month. Don't buy tools as
 procrastination.
 
-> ✏️ **FILL IN:** Your named stack with links (and affiliate links if you have them —
-> disclose that to students plainly if you do). Include a 5-minute tour of how the
-> pieces connect.
+**The named stack:** CapCut + Later (content), ConvertKit (email), Carrd (pages),
+Stripe (payments), Google Sheets (deal tracker), Calendly (calls), Dropbox Sign or
+DocuSign (contracts), Notion (idea bank + client docs). Roughly $60–100/month at
+full build-out. If you ever use affiliate links when recommending tools, say so on
+screen at that moment. **[TO RECORD]** a 5-minute tour of how the pieces connect.
 
 **Action Step:** Fill any gaps in your own stack. Cancel anything you haven't opened
 in 30 days.
@@ -51,8 +53,11 @@ The habits that separate a business from a hobby:
   3. Content: which posts drove DMs/clicks (not views)
   4. One decision: the single biggest thing to change next week
 
-> ✏️ **FILL IN:** Your weekly review template (Notion/Sheets link) and a filmed
-> example of you actually running one.
+**The template (copy into Notion/Sheets — four boxes):** MONEY (in / owed / out) ·
+PIPELINE (pitches sent, replies, calls booked, sales) · CONTENT (top post by
+DMs-not-views, worst post, one-line why for each) · DECISION (the single change for
+next week). Four boxes, 30 minutes, same day every week. **[TO RECORD]** yourself
+running one real review, unedited.
 
 **Action Step:** Do your first weekly review now, with whatever data you have. Put a
 recurring 30-min block on the calendar.
@@ -75,8 +80,11 @@ you'd spend on money-making work. In order, for almost every creator:
 How to hire small: start with one paid test project, clear written instructions
 (record a Loom of you doing the task once), weekly check-in, pay promptly.
 
-> ✏️ **FILL IN:** Your first-hire story — where you found them, what you pay(ed), what
-> went wrong, and your actual editor/VA task list as a template.
+**The standard first-hire path (teach it straight):** a per-video editor, found by
+asking creators one tier up who edits theirs. Test project of three videos at a flat
+rate; the spec is a Loom of you editing one video your way. Typical short-form cost:
+$10–30/video. The two ways it goes wrong: hiring for hours instead of deliverables,
+and giving feedback scattered across DMs instead of one written doc.
 
 **Action Step:** Write the job post for your first hire — even if you're not ready to
 post it yet. Knowing the trigger point ("when I hit $X/mo or lose Y hrs/week") makes
@@ -102,9 +110,11 @@ only three levers:
 
 Pull ONE lever per quarter. Pulling all three at once breaks the machine you built.
 
-> ✏️ **FILL IN:** Your own scaling story mapped to these levers — what you pulled
-> first and what the numbers did. If you're not there yet personally, use a client
-> or documented case study and say so.
+**Nick's account maps to levers 1 and 3:** collabs and duet-bait expanded reach
+(more traffic), and turning Nick's own songs into sounds other creators used was
+pure leverage — content that recruits more content. The order that works: dominate
+one platform organically, then repurpose to a second, and only once a funnel
+demonstrably converts consider paid amplification of already-proven posts.
 
 **Action Step (worksheet):** Write your next-quarter plan: which single lever, what
 specific action, what number tells you it worked.

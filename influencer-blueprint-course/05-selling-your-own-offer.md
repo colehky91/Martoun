@@ -22,13 +22,16 @@ is built on a captured audience.
 checklist, mini-guide, template, or free training. Rule: it should solve ONE narrow
 problem in under 15 minutes and naturally lead to the paid offer.
 
-> ✏️ **FILL IN:** Your funnel as the worked example — the actual lead magnet, the
-> landing page, the email capture numbers. Screen-record a walkthrough of the whole
-> path as a user sees it.
+**The reference build (what we install for artists):** TikTok/IG bio → one smart-link
+page → for artists, pre-save + Spotify; for creators selling, a one-page site with
+the lead magnet. Capture the email at the link page ("get the drop first"), deliver
+by email, sell from email + DMs. That's the entire machine — anything fancier waits
+until this one prints. **[TO RECORD]** a 3-minute walkthrough of the path exactly as
+a fan experiences it, phone in hand.
 
-> ✏️ **FILL IN:** Your recommended tool stack with links (landing page builder, email
-> platform, checkout — e.g. the ones YOU use), and roughly what it costs per month so
-> students can budget.
+**Stack:** Beacons or Linktree (link page — free), Carrd (~$19/year, landing pages),
+ConvertKit or MailerLite (email — free to ~1k subscribers), Stripe or Gumroad
+(checkout), Calendly (calls). Under $30/month all-in until revenue justifies more.
 
 **Action Step:** Create your lead magnet (one sitting, max 3 hours) and set up the
 capture page.
@@ -56,9 +59,11 @@ Sales page structure, top to bottom — this is a fill-in template, not theory:
 7. **FAQ:** the 5 objections from your DMs.
 8. **Final CTA.**
 
-> ✏️ **FILL IN:** Your own sales page, annotated section by section — "here's why this
-> headline, here's the DM this testimonial came from." An annotated real page teaches
-> 10x better than the template alone.
+**Your worked example is this course's own sales page** — the live one. Walk
+students through it on screen, section by section: the headline is the promise plus
+the receipts; the problem section is written in DM language; the proof block is real
+analytics screenshots; the FAQ is the five objections from our DMs, answered
+straight. Teaching from your own page also quietly re-sells the page.
 
 **Action Step (worksheet):** Draft each of the 8 sections in a doc. Ship an ugly v1 —
 copy quality matters more than design.
@@ -84,9 +89,14 @@ At this audience size, DMs are your highest-converting channel. The flow, trigge
 Non-negotiables: never cold-DM strangers with a pitch, never copy-paste walls of text,
 never argue with a no. The DM flow only works on people who raised their hand.
 
-> ✏️ **FILL IN:** 2–3 real (anonymized) DM conversations that ended in a sale — the
-> actual messages. Annotate the turning points. This is consistently the lesson
-> students say was worth the course price.
+**Teach with this labeled example flow** (and swap in real, permissioned screenshots
+as sales accumulate — never present an example as a real transcript):
+Viewer comments WORD → You: "Here it is [link] — quick one: what are you working
+on?" → Them: "trying to get my music heard, stuck at 2k" → You: "Send me your best
+video." → *(they do)* → "Your hook starts at second six — strangers are gone by
+second two. Fixing exactly that is what [offer] does. Want the link, or want 15
+minutes on a call?" The turning point is always the same: you looked at THEIR thing
+before you mentioned yours.
 
 **Action Step:** Run one "comment [WORD]" post this week and work every reply through
 the 5-step flow. Log outcomes.
@@ -110,9 +120,12 @@ announcement post:
   hours). Half your sales will come on the last day. That's normal — don't panic on
   day 5.
 
-> ✏️ **FILL IN:** Your real launch calendar and results, day by day — including the
-> flat middle days, so students don't quit on day 5. All email copy skeletons are in
-> the swipe file; drop in your actual launch emails as examples.
+**Set expectations with the shape, not numbers:** day 3 (open) spikes, days 4–6 sag
+— this is where people panic, stop posting, and lose the half of launch revenue that
+only ever arrives on day 7. Post the full calendar anyway; the sag is part of the
+plan, not a verdict. *(After your first launch, screenshot the day-by-day and drop
+it here — a real sag-then-spike graph becomes the best teaching asset in the
+module.)* Email skeletons are finalized in the swipe file §5.
 
 **Action Step (worksheet):** Fill in the 7-day calendar: each day's post(s), story
 sequence, and email, with dates.

@@ -20,9 +20,11 @@ about that either way. The moment you try to convince everyone, you convert no o
 The posture: **doctor, not vendor.** A doctor asks questions, diagnoses, and
 prescribes — and refuses to prescribe when it doesn't fit.
 
-> ✏️ **FILL IN:** Your first-sales-call horror story. Everyone has one. Then contrast
-> with what a good call feels like now. Vulnerability here buys trust for the rest of
-> the module.
+**The confession that lands (make it yours):** everyone's first sales call is the
+same call — you talk 80% of the time, pitch features nobody asked about, get weird
+around the price, and end with "so yeah… let me know!" Name whichever of those you
+did. The contrast: a good call feels like being interviewed by someone genuinely
+deciding — because that's what it is.
 
 **Action Step:** Book your calendar tool (Calendly or similar), 30-minute slots, with
 2–3 qualifying questions on the booking form (goal, current situation, budget range).
@@ -50,9 +52,10 @@ Five phases, with time boxes:
 
 Rule: they should talk 60%+ of the call. If you're monologuing, you're losing.
 
-> ✏️ **FILL IN:** A recorded roleplay of the full call — you and your business partner
-> playing coach/prospect. This recording IS the lesson; the framework above is just
-> its outline. Consider also including a "bad call" version for contrast.
+**[TO RECORD]** You and your partner, ~30 minutes total: one full call with the
+prospect played honestly (skeptical, budget-conscious), then five minutes of the
+"bad call" version — monologuing, feature-dumping — for contrast. This recording IS
+the lesson; the framework above is just its outline.
 
 **Action Step (worksheet):** Write your own phase 1 frame and your phase 4 replay
 sentence, word for word. Practice aloud twice.
@@ -80,8 +83,12 @@ responses:
    study you have — and if you don't have one for their situation, say so and let
    them decide with accurate information.
 
-> ✏️ **FILL IN:** The objections you ACTUALLY hear in your niche and your real
-> responses. Record a rapid-fire roleplay of all four.
+**The niche-specific four you'll actually hear:** "I've been burned by a course
+before" (answer with receipts plus exactly what's inside — no adjectives);
+"can't I learn this free on YouTube?" (yes — what you're buying is sequence,
+receipts, and speed, not secrets; say that plainly); "will this work at MY size?"
+(the system is size-agnostic, the timeline isn't — tell them what moves first at
+their size); and price (respond exactly as in 6.3 #1).
 
 **Action Step:** Script your responses to the big four in your own voice.
 
@@ -100,8 +107,10 @@ Most high-ticket sales close in follow-up, not on the call. The system:
   loop — should I take you off my list for this round?").
 - Three touches, then stop. People who feel hunted don't buy, and they tell others.
 
-> ✏️ **FILL IN:** Your actual follow-up message templates (also going in the swipe
-> file) and one story of a sale that closed on touch three.
+Templates are finalized in the swipe file (day-2 recap / day-5 case study / day-10
+close-the-loop). The pattern behind most closed follow-ups: the day-5 touch answers
+THEIR specific objection from the call — never a generic "just checking in." Quote
+their own words back to them.
 
 **Action Step:** Set up follow-up templates in your notes app / CRM so every call ends
 with the sequence armed.

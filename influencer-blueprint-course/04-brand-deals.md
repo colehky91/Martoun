@@ -21,9 +21,12 @@ What brands actually buy: audience match (their customer = your follower), engag
 quality (real comments, not bot hearts), and content skill (can you make an ad that
 doesn't look like an ad).
 
-> ✏️ **FILL IN:** Your best brand-deal proof — deal screenshots, payout screenshots,
-> or client examples (amounts redacted or not, your call — but real). If your proof is
-> thinner here, use documented public examples and say so honestly.
+**The credibility play here:** Nick's numbers are your proof of audience-building;
+brand-deal receipts accumulate as clients close them. Until then, teach from market
+reality: micro and mid-tier creators (10k–500k) out-convert celebrity accounts on
+engagement rate, and brands know it — which is exactly the argument in your pitch.
+*(As client deal screenshots land, drop them in — one real receipt upgrades this
+whole module.)*
 
 **Action Step:** Write your one-line brand pitch: "I reach [WHO] who care about
 [WHAT], with [engagement stat] engagement."
@@ -49,9 +52,11 @@ they ask. Pages:
 **Engagement rate math:** (avg likes + comments on last 10 posts) ÷ followers × 100.
 Above ~3% is a selling point at this size — feature it.
 
-> ✏️ **FILL IN:** Your own media kit as the worked example (PDF in the course assets),
-> plus a Canva template link students can duplicate. This template is one of the
-> highest-perceived-value assets in the whole course.
+**Build the template once in Canva** (five pages exactly as listed above) and
+duplicate it per client — Canva's own "media kit" starting templates get you 90%
+there in under an hour. Screenshot real analytics into pages 2–3; typed numbers
+convince no one. *(Drop your finished template link here so students can duplicate
+it.)*
 
 **Action Step:** Build your media kit from the template. Deliverable: a shareable link.
 
@@ -78,9 +83,11 @@ magic numbers):
 - **Packages beat one-offs:** pitch a 3-post package at a modest discount — bigger
   invoice for you, better results for them (repetition converts).
 
-> ✏️ **FILL IN:** Real rate examples — what you or your clients actually charged for
-> specific deliverables at specific follower counts, and what the brand said yes to.
-> 2–3 real data points make this lesson land harder than any formula.
+**Working ranges to teach (floors, not ceilings)** at ~50k followers with 3%+
+engagement: dedicated TikTok/Reel $500–$1,500 in general niches, 2–5x that in
+finance/B2B/health; story package (3 frames) $150–$400; UGC-only (content without
+posting) $150–$500 per asset; 30-day paid usage +30–50% of the content fee; 90-day
+category exclusivity +25–50%. Always quote from the package, never the single post.
 
 **Action Step (worksheet):** Build your rate card: 1 post / 3-post package / story
 package / UGC-only (content without posting) — with usage rights priced separately.
@@ -109,9 +116,10 @@ Don't wait for inbound. The system:
 Expected math to set honestly: cold outreach at this level might convert 2–10% to
 conversations. That's why the number is 20, not 5.
 
-> ✏️ **FILL IN:** A real successful pitch you've sent (screenshot) and the reply. Plus
-> your tracking-sheet template (Google Sheets link) with columns: brand / contact /
-> date pitched / follow-ups / status / value.
+The pitch template and both follow-ups are finalized in the swipe file (`09`) — use
+them verbatim. Tracker columns are in swipe file §8; build the sheet once with three
+example rows and share it view-only. *(When the first real winning pitch lands, swap
+its screenshot in as the taught example.)*
 
 **Action Step:** Build the 50-brand list, send the first 10 pitches this week, 10 next
 week. Log everything.
@@ -135,9 +143,12 @@ When a brand replies:
 - **Red flags:** pay-to-play ("buy product to be an ambassador"), unlimited revisions,
   perpetual usage rights for free, exclusivity with no fee, "exposure" as payment.
 
-> ✏️ **FILL IN:** One real negotiation story with the actual back-and-forth — where
-> they started, what you countered, where it landed. And one deal you walked away
-> from and why.
+**Teach it as the pattern (every negotiation students hit is one of these two
+shapes):** Shape one — brand opens at $400 for a dedicated video "and we'd love
+usage." Counter: "$400 covers organic only; with 30-day paid usage it's $700." They
+come back at $600 — take it; one sentence just earned 50%. Shape two — perpetual
+usage plus 6-month exclusivity at the same $400: decline politely, keep the contact,
+and mean it. The willingness to walk is the leverage.
 
 **Action Step:** Write your two counter-scripts (rate too low / product-only offer) so
 you're never negotiating live without a plan.

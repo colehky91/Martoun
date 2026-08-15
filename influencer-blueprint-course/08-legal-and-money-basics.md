@@ -30,8 +30,11 @@ The practical rules:
 This isn't just fine-avoidance — audiences at this size can smell undisclosed ads, and
 trust is the entire asset you monetize. Disclose proudly; it reads as professionalism.
 
-> ✏️ **FILL IN:** Screenshots of YOUR properly disclosed sponsored posts as the
-> examples. Link the current FTC endorsement guides page so students read the source.
+**Standard lines (final versions in swipe file §9):** caption "#ad — paid
+partnership with [Brand]" placed up front; spoken "quick disclosure — this one's
+sponsored by [Brand]"; affiliate "I earn a commission through my links." Source of
+truth to link students: the FTC Endorsement Guides at ftc.gov/business-guidance.
+*(Show your first properly disclosed client post on screen once one exists.)*
 
 **Action Step:** Audit your past sponsored/affiliate posts; fix any missing
 disclosures. Write your standard disclosure line for captions and one for video.
@@ -59,10 +62,10 @@ If a deal is worth four figures, having a lawyer spend 30 minutes on the contrac
 cheap. And when the brand has no contract: send your own simple agreement (get a
 lawyer to draft your reusable template once — it pays for itself forever).
 
-> ✏️ **FILL IN:** A real (redacted) brand contract, marked up — highlight the five
-> clauses and one clause you negotiated. Consider having YOUR lawyer produce a simple
-> creator agreement template you're licensed to distribute to students; it's a
-> massive value-add. Don't distribute a template no professional has reviewed.
+**[TO PRODUCE — one-time]:** have a lawyer draft a simple reusable creator agreement
+you're licensed to share with students, and mark up one real (redacted) brand
+contract against the 5-clause checklist. Until then teach the checklist — it's
+complete as written. Never distribute a legal template no professional has reviewed.
 
 **Action Step (worksheet):** The 5-clause checklist card — keep it open next time a
 contract lands.
@@ -92,9 +95,10 @@ The map (professionals fill in the details for each student's country/state):
 **When to get an accountant: the first year you cross meaningful creator income.
 Sooner is better.**
 
-> ✏️ **FILL IN (optional, high value):** A 15–20 minute recorded interview with a real
-> CPA who works with creators, covering the five bullets above. Instantly the most
-> credible lesson in the module — and it keeps you safely out of advice-giving.
+**[TO RECORD — optional, worth it]:** 20 minutes with a CPA who handles
+self-employment/creator income, walking the five bullets above. Costs one
+consultation fee; instantly the most credible lesson in the module, and it keeps you
+safely out of the advice-giving business.
 
 **Action Step:** Book the accountant consult (many do a free first call). Bring:
 income so far, income goal, and the question "entity now or later?"
@@ -120,9 +124,10 @@ Quick-hit list:
   apply to brands — and beyond the rules, your audience is small enough that your
   reputation IS your distribution.
 
-> ✏️ **FILL IN:** Any story from your own journey — a platform scare, a rights issue,
-> a refund you honored that won a fan. End the module (and the course's teaching arc)
-> on the theme that trust compounds.
+**The teaching close:** platforms change their rules overnight and accounts get
+flagged by mistake — the email list and the receipts folder are the two things
+nobody can take from you. And trust compounds exactly the way Nick's views did:
+slowly, then all at once — and only if you never spend it on a shortcut.
 
 **Action Step:** Export your email list today and calendar a monthly export. Write
 your own results-claims rule of thumb for your sales content.
